@@ -1,0 +1,42 @@
+.pagination{
+	li{
+		> a,
+        > span {
+         color:#72737a;
+         background-color: #eeeeee;
+         @extend %border-none;
+         margin: 0 2px 0 2px;
+         @extend %border-radius-50;
+         &:hover{
+            background-color: map-get($colors,primary) ;
+            color: map-get($colors,white);
+        }
+        &:active{
+          background-color: map-get($colors,green);
+      }
+  }
+}
+  > .disabled {
+    > span,
+    > span:hover,
+    > span:focus,
+    > a,
+    > a:hover,
+    > a:focus {
+      color:#72737a;
+      background-color: #EEEEEE;
+      border-color: #EEEEEE;
+  }
+}
+
+}
+.pagination-sm > li:last-child > {
+  a, span {
+    @extend %border-radius-50;
+  }
+}
+.pagination-sm > li:first-child > {
+  a, span {
+   @extend %border-radius-50;
+  }
+}

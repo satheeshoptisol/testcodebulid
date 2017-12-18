@@ -1,0 +1,93 @@
+
+.main-content{
+	margin-left: $sidebar-width;
+	position:  map-get($positions,relative);
+	padding-top: 53px;
+	width:calc(100% - #{$sidebar-width});
+	transition:all 0.25s ease-in 0s;
+}
+.count-value{
+	@extend .text-right;
+	h3{
+		color: map-get($colors,white);
+	}
+	p{
+		color: map-get($colors,black_40);
+	}
+}
+/*Count Detail */
+$countConfig: 'advertisement-count' green, 'advertiser-count' yellow, 'price-winner-count' blue, 'transaction-count' brightRed ; // TODO: move to _settings.scss
+@each $countDetail in $countConfig {
+	.#{nth($countDetail, 1)} {
+		background-color: map-get($colors, nth($countDetail, 2));
+		@extend %common-whitebackground;
+	}
+}
+.mt-16{
+	margin-top: 16px;
+}
+.advertiser-joined-count{
+	@extend %common-whitebackground;
+	@extend .text-center ;
+}
+.dashboard_header{
+	text-transform: map-get($textTransform,uppercase);
+	font-family:map-get($font-linotte,semiBold); 
+	color: map-get($colors,dark);
+	margin-bottom: 20px;
+}
+.common-graph{
+	@extend %common-whitebackground;	
+}
+.CG_group_buttons{
+	@extend .pull-right;
+	margin-bottom: 40px;
+}
+.dashboard_advertiser_list{
+	th{
+		font-family:map-get($font-linotte,semiBold);
+	}
+}
+.calender-button{
+	@extend %lightButton;
+	margin-left: 10px;
+}
+.calender-button-selected{
+	@extend .calender-button;
+	background-color: map-get($colors,blue);
+	color: map-get($colors,white);
+}
+.dashboard-h5{
+	@extend .pull-right;
+	text-transform: map-get($textTransform,uppercase);
+	color: map-get($colors,secondary);
+}
+.popular_Advertisement{
+	@extend %common-whitebackground;
+	@extend .text-center;
+	.popular-ad-count{
+		font-size: 20px;
+	}
+	.popular-advertiser-name{
+		font-family:map-get($font-linotte,semiBold);
+	}
+	.ad-count-label{
+		color: map-get($colors,secondary);
+		font-size: 16px;
+	}
+}
+.welcome-dashoboard-msg{
+	@extend %span-header;
+}
+.contentLeft {
+	width: calc(100% - #{$sidebar-full-width});
+	margin-left: $sidebar-full-width;
+}
+.Profile-picture{
+	img{
+		@extend %border-radius-50;
+		border: 2px solid #D7D9DA;
+    height: 150px;
+    width: 150px;
+	}
+}

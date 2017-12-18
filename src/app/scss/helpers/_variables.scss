@@ -1,0 +1,58 @@
+$font-linotte : (
+  light: linotte-light,
+  semiBold: linotte-semibold,
+  bold: linotte-bold,
+  heavy: linotte-heavy,
+  regular: linotte-regular
+);
+//urls
+$url_lightwoff2:    url(../../assets/fonts/linotte_light-webfont.woff2);
+$url_lightwoff:     url(../../assets/fonts/linotte_light-webfont.woff);
+$url_regularwoff2:    url(../../assets/fonts/linotte_regular-webfont.woff2);
+$url_regularwoff:     url(../../assets/fonts/linotte_regular-webfont.woff);
+$url_boldwoff2:     url(../../assets/fonts/linotte_bold-webfont.woff2);
+$url_boldwoff:      url(../../assets/fonts/linotte_bold-webfont.woff);
+$url_heavywoff2:    url(../../assets/fonts/linotte_heavy-webfont.woff2);
+$url_heavywoff:     url(../../assets/fonts/linotte_heavy-webfont.woff);
+$url_semiBoldwoff2: url(../../assets/fonts/linotte_semi_bold-webfont.woff2);
+$url_semiBoldwoff:  url(../../assets/fonts/linotte_semi_bold-webfont.woff);
+/*Colors*/
+$colors: (
+  primary:    #fe5421,
+  secondary:  #85a4bc,
+  light:      #ebeff2,
+  dark:       #535758,
+  green:      #6fcdb5,
+  yellow:     #f9b233,
+  blue:       #019ee3,
+  brightRed:  #dd3e3e,
+  white:      #fff,
+  grey:       #aab4b9,
+  black_40:   rgba(0,0,0,0.4)
+);
+
+/*Position*/
+$positions:(
+  fixed:fixed,
+  relative:relative,
+  absolute:absolute  
+  );
+/*text-transform*/
+$textTransform: (
+  uppercase:    uppercase,
+  capitalize:   capitalize
+);
+/*Float*/
+$float:  (
+	left:   left,
+	right:  right
+);
+// $fontsSize: (
+//   size-22: 22px,
+//   size-20: 20px,
+//   size-18: 18px,
+//   size-16: 16px
+// );
+$sidebar-width:50px;
+
+$sidebar-full-width: 244px;

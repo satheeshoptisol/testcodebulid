@@ -1,0 +1,40 @@
+.createinstantSlideOut{
+	@extend .createadvertiserSlideOut;
+}
+.instantadPreview{
+	@extend .advertiserPreview;
+}
+.createinstantads{
+	@extend %padding-0;
+}
+.advertisement-header{
+		@extend %slideheader;
+		i{
+			@extend %content-middle;
+		}
+	}
+.flip-plus{
+	@extend .zipcode-plus;
+}
+.adsPreview-btn{
+	@extend %lightButton;
+	 margin: 10px;
+    padding: 12px 23px;
+}
+.createAdvertisement{
+	@extend .createinstantads;
+}
+
+.multiSelect .line {
+  max-height: 60px !important;
+}
+.ads-description{
+	text-align: left;
+	textarea{
+		 border-color: transparent transparent #ebeaea;
+    border-style: none none solid;
+    border-width: medium medium 1px;
+    resize: vertical;
+    width: 100%;
+	}
+}

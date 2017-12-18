@@ -1,0 +1,330 @@
+<section class="main-content" ng-class="{'contentLeft': cft.myClass.contentLeft}">
+  <div class="page-view" >
+    <div class="col-md-12">
+    <div class=" page-heading">
+      <h4 class="title-semibold"><img src="../assets/images/manage_Advertisers-orange.png" alt="/"><span>Manage Advertisers</span></h4>
+        <p class="advertiserCount"> Total Advertisers {{vm.advertiserCount}}</p>
+        <div class="search-list">
+         <div class="input-group">
+           <input type="text" class="form-control" ng-model="vm.searchValue" ng-model-options="{debounce: 750}" ng-change="vm.checkEmpty();" placeholder="Search" aria-describedby="basic-addon1">
+            <span class="search-button input-group-addon" id="basic-addon1"><i class="fa fa-search" ng-click="vm.search(vm.searchValue);" aria-hidden="true"></i>
+        </span>
+        </div>
+        </div>
+        </div>
+        <div class="advertiser-table">
+          <table class="table table-striped table-hover advertiserList">
+            <tr><!-- Table Heading-->
+              <th>#</th>
+              <th> Advertiser Name<span class="sort-icon"><i class="fa fa-sort" aria-hidden="true"></i></th>
+              <th>Email<span class="sort-icon"><i class="fa fa-sort" aria-hidden="true"></i></th>
+              <th>Status<span class="sort-icon"><i class="fa fa-sort" aria-hidden="true"></i></th>
+              <th>Created Date<span class="sort-icon"><i class="fa fa-sort" aria-hidden="true"></i></th>
+              <th>Total Ads<span class="sort-icon"><i class="fa fa-sort" aria-hidden="true"></i>  </th>
+              <th class="addAdvertiser" ng-click="vm.toggleClass()"><span class="fa-stack"><i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-plus fa-stack-1x fa-inverse"></i></span></th>
+              </tr>
+              <tr>
+                <td> 
+                  <div class="Advertiser-cb" ng-if="vm.filteredList.length !== 0 ">
+                    <input class="advertiser-toggle-cb" id="styled-checkbox-all" type="checkbox" value="value1" ng-model="vm.isAllSelected" ng-change="vm.toggleAll();">
+                    <label for="styled-checkbox-all"></label>
+                  </div></td>
+                  <td ></td>
+                   <td></td>
+                     <td></td>
+                     <td></td>
+                     <td></td>
+                    <td ng-show="vm.hideSearchClass.hideSearch">
+                      <button class="btn delete-all-btn" ng-click="vm.deleteAllAdvertiser()">Delete All</button>
+                    </td>
+                  </tr>
+
+                  <tr ng-repeat="advertiser in vm.filteredList | orderBy: '-updatedAt' ">
+                    <td> 
+                      <div class="Advertiser-cb">
+                        <input class="advertiser-toggle-cb" id="styled-checkbox-{{$index}}" type="checkbox" value="value1" ng-model="advertiser.selected" ng-change="vm.checkBoxToggled()">
+                        <label for="styled-checkbox-{{$index}}"></label>
+                      </div>
+                  <!-- <input type="checkbox" ng-model="advertiser.selected" ng-change="vm.checkBoxToggled()"> --></td>
+                      <td ng-click="vm.toggleViewAdvertiserClass(advertiser.id)">{{advertiser.fullName}} </td>
+                      <td ng-click="vm.toggleViewAdvertiserClass(advertiser.id)" class="advertiser-email">{{advertiser.email}}</td>
+                      <td ng-init="status=vm.getStatus(advertiser.isActive)" ng-click="vm.toggleViewAdvertiserClass(advertiser.id)">{{status}}</td>
+                      <td ng-click="vm.toggleViewAdvertiserClass(advertiser.id)">{{advertiser.createdAt | date:'MM/dd/yyyy'}}</td>
+                      <td ng-click="vm.toggleViewAdvertiserClass(advertiser.id)">0</td>
+                      <td class="action-icons">
+                        <button ng-click="vm.toggleEditAdvertiserClass(advertiser.id);"><span class="fa-stack"><i class="fa fa-circle fa-stack-2x"></i>
+                          <i class="fa fa-pencil edit-icon fa-stack-1x fa-inverse"></i></span></button>
+                          <button ng-click="vm.deleteModal(advertiser);"><span class="fa-stack"><i class="fa fa-circle fa-stack-2x"></i>
+                            <i class="fa fa-trash-o delete-icon fa-stack-1x fa-inverse"></i></span></button>
+                        </td>
+                      </tr>
+
+                    </table>
+                    <div ng-if="vm.filteredList.length === 0 "><h3 class="text-uppearcase  text-center ">No advertisers in this list</h3> </div>
+
+
+                    <uib-pagination boundary-links="true" total-items="vm.advertiserCount" ng-model="vm.currentPage" previous-text="&lsaquo;" ng-change="vm.pageChanged()" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;" items-per-page="vm.itemsPerPage" data-max-size="5" boundary-links="true" class="pagination-sm"></uib-pagination>
+
+                  </div><!-- Advertiser Table End-->
+                  <!-- Slide Content-->
+                  <!--Create Advertiser-->
+                  <div class="createadvertiserSlideOut " ng-class="{'createAdvertiserForm': vm.myClass.createAdvertiserForm}">
+                    <div class="advertiserPreview col-md-6 col-sm-12">
+                      <div class="preview-header">
+                        <p>Preview</p>
+                      </div>
+                      <div class="advertiserPreviewContent">
+                        <div class="advertiser-pic">
+                          <img src="../assets/images/default-pic.png">
+                          <p class="preview-username">{{vm.advertiser.firstName}} {{vm.advertiser.lastName}}</p>
+                        </div>
+                        <div class="accountDetailPreview">
+                          <p class="acc-preview-header">Account Detail</p>
+                          <ul class="detaillist">
+                            <li>
+                              <span><img src="../assets/images/company.png"></span>
+                              <p>{{vm.advertiser.companyName ? vm.advertiser.companyName : "Company Name"}}</p>
+                            </li>
+                            <li>
+                              <span><img src="../assets/images/email.png"></span>
+                              <p>{{vm.advertiser.email ? vm.advertiser.email : "Email"}}</p>
+                            </li>
+                            <li>
+                              <span><img src="../assets/images/location.png"></span>
+                              <p>{{vm.advertiser.location ? vm.advertiser.location : "Location"}}</p>
+                            </li>
+                            <li>
+                              <span><img src="../assets/images/phone.png"></span>
+                              <p>{{vm.advertiser.contactNumber ? vm.advertiser.contactNumber : "Contact Number"}}</p>
+                            </li>
+                          </ul>
+                        </div>
+                      </div> <!--Preview Create Advertiser End-->
+                    </div>
+                    <!-- Create Advertiser Form-->
+                    <div class="createAdvertiser col-md-6 col-sm-12"> 
+                      <div class="createAdvertiser-header">
+                        <p>Create Advertiser</p>
+                        <i class="fa fa-times" ng-click="vm.closeSlideContent()" aria-hidden="true"></i>
+                      </div>
+                      <form class="advertiserForm" name="vm.advertiserForm" ng-submit="vm.createAdvertiser(vm.advertiserForm);" method="post" novalidate>
+                        <div class="AdvertiserDetails">
+                          <span><img src="../assets/images/username.png"></span>
+                          <input type="text" name="firstName" ng-model="vm.advertiser.firstName" placeholder="First Name" required="false">
+                          <label >First Name</label>
+                          <label for="name" ng-show="vm.advertiserForm.$submitted && vm.advertiserForm.firstName.$error.required" class="error">This field is required.</label>
+                        </div>
+                        <div class="AdvertiserDetails">
+                          <span><img src="../assets/images/username.png"></span>
+                          <input type="text" name="lastName" ng-model="vm.advertiser.lastName" placeholder="Last Name">
+                          <label >Last Name</label>
+                        </div>
+                        <div class="AdvertiserDetails">
+                          <span><img src="../assets/images/company.png"></span>
+                          <input type="text" name="companyName" ng-model="vm.advertiser.companyName" placeholder="Company Name" required>
+                          <label>Company Name</label>
+                          <label for="name" ng-show="vm.advertiserForm.$submitted && vm.advertiserForm.companyName.$error.required" class="error">This field is required.</label>
+                        </div>
+                        <div class="AdvertiserDetails">
+                          <span><img src="../assets/images/email.png"></span>
+                          <input type="text" name="email" ng-model="vm.advertiser.email" ng-pattern='/^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/' placeholder="Email Address" required>
+                          <label>Email Address</label>
+                          <label for="name" ng-show="vm.advertiserForm.$submitted && vm.advertiserForm.email.$error.required" class="error">This field is required.</label>
+                          <label for="name" ng-show="vm.advertiserForm.$submitted && vm.advertiserForm.email.$error.pattern" class="error">Invalid Email Format</label>
+                        </div>
+                        <div class="AdvertiserDetails">
+                          <span><img src="../assets/images/location.png"></span>
+                          <input type="text" name="location" ng-model="vm.advertiser.location" placeholder="Location" required>
+                          <label>Location</label>
+                          <label for="name" ng-show="vm.advertiserForm.$submitted && vm.advertiserForm.location.$error.required" class="error">This field is required.</label>
+                        </div>
+                        <div class="AdvertiserDetails">
+                          <span><img src="../assets/images/phone.png"></span>
+                          <input type="text" name="phoneNumber" ng-model="vm.advertiser.contactNumber" placeholder="Phone Number"  ng-pattern="/^[0-9]{10,16}$/" required>
+                          <label>Phone Number</label>
+                          <label for="name" ng-show="vm.advertiserForm.$submitted && vm.advertiserForm.phoneNumber.$error.required" class="error">This field is required.</label>
+                          <label for="name" ng-show="vm.advertiserForm.$submitted && vm.advertiserForm.phoneNumber.$error.pattern" class="error">Invalid Mobile Number Format.</label>
+                        </div>
+                        <button type="submit" ng-disabled="vm.isDisabled" ng-click="submit=true" class="btn createAdvertiser-btn">Create Account</button>
+                      </form>
+                    </div><!-- Create Advertiser form end-->
+                  </div><!--Create advertiserSlideOut end-->
+                  <!-- Create Advertiser End-->
+                  <!--Edit Advertiser-->
+                  <div class="editAdvertiserSlideOut animated slideInRight" ng-class="{'editAdvertiserForm': vm.editClass.editAdvertiserForm}">
+                    <div class="editAdvertiserPreview col-md-6 col-sm-12">
+                      <div class="preview-header">
+                        <p>Edit Preview</p>
+                      </div>
+                      <div class="advertiserPreviewContent">
+                        <div class="advertiser-pic">
+                          <img src="../assets/images/default-pic.png">
+                          <p class="preview-username">{{vm.editAdvertiser.firstName}} {{vm.editAdvertiser.lastName}}</p>
+                          <p class="advertiser-status">{{vm.editAdvertiser.status}}</p>
+                        </div>
+                        <div class="editAccountDetailPreview">
+                          <p class="acc-preview-header">Account Detail</p>
+                          <ul class="editDetaillist">
+                            <li>
+                              <span><img src="../assets/images/company.png"></span>
+                              <p>{{vm.editAdvertiser.companyName}}</p>
+                            </li>
+                            <li>
+                              <span><img src="../assets/images/email.png"></span>
+                              <p>{{vm.editAdvertiser.email}}</p>
+                            </li>
+                            <li>
+                              <span><img src="../assets/images/location.png"></span>
+                              <p>{{vm.editAdvertiser.location}}</p>
+                            </li>
+                            <li>
+                              <span><img src="../assets/images/phone.png"></span>
+                              <p>{{vm.editAdvertiser.contactNumber}}</p>
+                            </li>
+                          </ul>
+                        </div>
+                      </div> <!--Preview Edit Advertiser End-->
+                    </div>
+                    <!-- Edit Advertiser Form-->
+                    <div class="editAdvertiser col-md-6 col-sm-12"> 
+                      <div class="editAdvertiser-header">
+                        <p>Edit Advertiser</p>
+                        <i class="fa fa-times" ng-click="vm.closeSlideContent()" aria-hidden="true"></i>
+                      </div>
+                      <div class="editAdvertier-pic">
+                        <span>
+                          <img class="userimg" src="../assets/images/default-pic.png">
+                          <span class="camera-icon"><img src="../assets/images/camera.png"></span></span>
+                        </div>
+                        <form class="editAdvertiser-fields" method="post" name="vm.editAdvertiserForm" ng-submit="vm.editAdvertiserFields(vm.editAdvertiserForm)" novalidate>
+                          <div class="AdvertiserDetails">
+                            <span><img src="../assets/images/username.png"></span>
+                            <input type="text" name="firstName" ng-model="vm.editAdvertiser.firstName" placeholder="First Name" required>
+                            <label >First Name</label>
+                            <label for="name" ng-show="vm.editAdvertiserForm.$submitted && vm.editAdvertiserForm.firstName.$error.required" class="error">This field is required.</label>
+                          </div>
+                          <div class="AdvertiserDetails">
+                            <span><img src="../assets/images/username.png"></span>
+                            <input type="text" name="lastName" ng-model="vm.editAdvertiser.lastName" placeholder="Last Name">
+                            <label >Last Name</label>
+                          </div>
+                          <div class="AdvertiserDetails">
+                            <span><img src="../assets/images/company.png"></span>
+                            <input type="text" name="companyName" ng-model="vm.editAdvertiser.companyName" placeholder="Company Name" required>
+                            <label>Company Name</label>
+                            <label for="name" ng-show="vm.editAdvertiserForm.$submitted && vm.editAdvertiserForm.companyName.$error.required" class="error">This field is required.</label>
+                          </div>
+                          <div class="AdvertiserDetails">
+                            <span><img src="../assets/images/email.png"></span>
+                            <input type="text" name="email" ng-model="vm.editAdvertiser.email" ng-pattern='/^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/' placeholder="Email Address" required>
+                            <label>Email Address</label>
+                            <label for="name" ng-show="vm.editAdvertiserForm.$submitted && vm.editAdvertiserForm.email.$error.required" class="error">This field is required.</label>
+                            <label for="name" ng-show="vm.editAdvertiserForm.$submitted && vm.editAdvertiserForm.email.$error.pattern" class="error">Invalid email format.</label>
+                          </div>
+                          <div class="AdvertiserDetails">
+                            <span><img src="../assets/images/location.png"></span>
+                            <input type="text" name="location" ng-model="vm.editAdvertiser.location" placeholder="Location" required>
+                            <label>Location</label>
+                            <label for="name" ng-show="vm.editAdvertiserForm.$submitted && vm.editAdvertiserForm.location.$error.required" class="error">This field is required.</label>
+                          </div>
+
+
+
+                          <div class="AdvertiserDetails">
+                            <span><img src="../assets/images/phone.png"></span>
+                            <input type="text" name="contactNumber" ng-model="vm.editAdvertiser.contactNumber" placeholder="Phone Number" ng-pattern="/^[0-9]{10,16}$/" required>
+                            <label>Phone Number</label>
+                            <label for="name" ng-show="vm.editAdvertiserForm.$submitted && vm.editAdvertiserForm.contactNumber.$error.required" class="error">This field is required.</label>
+                            <label for="name" ng-show="vm.editAdvertiserForm.$submitted && vm.editAdvertiserForm.contactNumber.$error.pattern" class="error">Invalid Mobile Number Format.</label>
+                          </div>
+
+                          <div class="AdvertiserDetails">
+                            <table class="status-toggle" width="90%">
+                              <tbody>
+                                <tr>
+                                  <td class="advertiser-status-label"><div>Status</div></td>
+                                  <td class="advertiser-status-toggle"> 
+                                    <label class="advertiser-status-toggle">
+                                      <input ng-model="vm.editAdvertiser.isActive" ng-change="vm.isActiveToggle()" class="ng-pristine ng-untouched ng-valid ng-not-empty" aria-invalid="false" style="" type="checkbox">
+                                      <div class="ad-slider"></div>
+                                    </label>
+                                  </td>
+                                </tr>
+                              </tbody>
+                            </table>
+                            
+                            <label for="name" ng-show="vm.editAdvertiserForm.$submitted && vm.editAdvertiserForm.isActive.$error.required" class="error">This field is required.</label>
+                          </div>
+
+                          <button type="submit" ng-disabled="vm.editDisabled" ng-click="submit1=true" class="btn createAdvertiser-btn">save</button>
+                        </form>
+                      </div><!-- Edit Advertiser form end-->
+                    </div><!--Edit advertiserSlideOut end-->
+                    <!--Advertiser Detail Slide-->
+                    <div class="advertiserDetailSlideOut animated slideInRight" ng-class="{'viewAdvertiserDetail': vm.viewAdvertiserClass.viewAdvertiserDetail}">
+                      <div class="editAdvertiserPreview col-md-12">
+                        <div class="advertiserDetailHeader">
+                          <p>{{vm.viewAdvertiser.fullName}} Detail</p>
+                          <i class="fa fa-times " ng-click="vm.closeSlideContent()" aria-hidden="true"></i>
+                        </div>
+                        <div>
+                          <div class="advertiser-pic">
+                            <img src="../assets/images/default-pic.png">
+                            <p class="preview-username">{{vm.viewAdvertiser.fullName}}</p>
+                          </div>
+                          <div class="advertiseradsCount">
+                            <ul>
+                              <li><p class="advertiserCountValue">0</p><p class="advertiserCountName">Ads</p></li>
+                              <li><p class="advertiserCountValue">0</p><p class="advertiserCountName">Views</p></li>
+                              <li><p class="advertiserCountValue">0</p><p class="advertiserCountName">Prize</p></li>
+                            </ul>
+                          </div>
+                          <div class="advertiserAccountDetail">
+                            <p class="acc-preview-header">Account Detail</p>
+                            <ul class="advertiserDetailList">
+                              <li>
+                                <span><img src="../assets/images/company.png"></span>
+                                <p>{{vm.viewAdvertiser.companyName}}</p>
+                              </li>
+                              <li>
+                                <span><img src="../assets/images/email.png"></span>
+                                <p>{{vm.viewAdvertiser.email}}</p>
+                              </li>
+                              <li>
+                                <span><img src="../assets/images/location.png"></span>
+                                <p>{{vm.viewAdvertiser.location}}</p>
+                              </li>
+                              <li>
+                                <span><img src="../assets/images/phone.png"></span>
+                                <p>{{vm.viewAdvertiser.contactNumber}}</p>
+                              </li>
+                              <li>
+                                <span><img src="../assets/images/calender.png"></span>
+                                <p>{{vm.viewAdvertiser.createdAt | date:'MM/dd/yyyy'}}</p>
+                              </li>
+                            </ul>
+                          </div>
+                          <button type="submit" ng-click="vm.toggleEditAdvertiserClass(vm.viewAdvertiser.id);" class="btn advertiserEdit-btn">Edit</button>
+                        </div> <!--Preview Edit Advertiser End-->
+                      </div>
+                    </div>
+                    <!-- Advertiser Detail Slide End-->
+                  </div>
+                </div>
+              </div>
+            </section>
+            <script type="text/ng-template" id="myModalContent.html">
+              <div class="modal-header deleteAdvertiser-header">
+                <button type="button" class="close close-advertsier-popup" ng-click="modal.cancel()" data-dismiss="modal">&times;</button>
+                <img class="advertiserPopUpPic" src="../assets/images/default-pic.png">
+              </div>
+              <div class="modal-body">
+                <p class="delAdvertiser-ques">Are you sure want to delete this Advertiser?</p>
+              </div>
+              <div class="modal-footer">
+                <button type="button" ng-click="modal.ok()" class="btn delete-advertiser-btn">Delete</button>
+                <button type="button" ng-click="modal.cancel()" class="btn cancel-advertiser-btn" data-dismiss="modal">Cancel</button>
+              </div>
+            </script>
+

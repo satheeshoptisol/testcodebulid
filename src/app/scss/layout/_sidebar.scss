@@ -1,0 +1,77 @@
+.sidebar{
+	position: map-get($positions,fixed);
+	width: $sidebar-width;
+	background-color: map-get($colors,white);
+	@extend %height-100;
+	@extend .pull-left;
+	transition:all 0.25s ease-in 0s;
+	box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.4);
+}
+.sidenav-items{
+		@extend %padding-0;
+	.sidenav-selected{
+		background-color: map-get($colors,primary);
+		.sidenav_title{
+			color: map-get($colors,white);
+			transition:all 5s ease-in 0s !important;
+		}
+	}
+	li{
+		padding: 20px 10px;
+		position: map-get($positions,relative);
+		.sidenav_title{
+		color: map-get($colors,secondary);
+		display: none;
+		}
+	}
+}
+.title-semibold{
+	font-family:map-get($font-linotte,semiBold); 
+	span{
+		vertical-align: middle;
+		margin-left: 4px;
+	}
+}
+
+.sidebarWidth {
+	width:$sidebar-full-width;
+	li{
+		.sidenav_title{
+			display:block;
+			margin: 4px 26px;
+			transition: 0.2s;
+			transition-timing-function: ease-out;
+			position: map-get($positions,absolute);
+			top:20px;
+		}
+	}
+}
+.sidenav-logo {
+    background: #ebeff2;
+    min-height: $navbar-height;
+    @extend .text-center;
+    box-shadow: 3px 0 2px 0 rgba(0, 0, 0, 0.2) inset;
+    img {
+    height: 34px;
+    margin-top: 7px;
+	}
+
+}
+.notification-items{
+		@extend %padding-0;
+	.notification-selected{
+		background-color: #F0F0F0;
+		.sidenav_title{
+			color: map-get($colors,white);
+			transition:all 5s ease-in 0s !important;
+		}
+	}
+	li{
+		padding: 20px 10px;
+		position: map-get($positions,relative);
+		.sidenav_title{
+		color: map-get($colors,secondary);
+		display: none;
+		}
+	}
+}

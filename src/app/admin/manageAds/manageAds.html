@@ -1,0 +1,122 @@
+<section class="main-content" ng-class="{'contentLeft': cft.myClass.contentLeft}">
+  <div class="page-view">
+    <!--page-view-->
+    <div class="col-md-12">
+      <!--div2-->
+      <div class=" page-heading">
+        <h4 class="title-semibold"><img src="../assets/images/manage_Advertisers-orange.png" alt="/">
+          <span>Manage Ads</span>
+        </h4>
+        <p class="advertiserCount"> Total Ads {{manageAd.advertisementCount}}</p>
+        <!--     <div class="search-list">
+     <div class="input-group">
+       <input type="text" class="form-control" ng-model="manageAd.searchValue" ng-model-options="{debounce: 750}" ng-change="manageAd.checkEmpty();" placeholder="Search" aria-describedby="basic-addon1">
+        <span class="search-button input-group-addon" id="basic-addon1"><i class="fa fa-search" ng-click="manageAd.search(manageAd.searchValue);" aria-hidden="true"></i>
+        </span>
+      </div>
+    </div> -->
+
+ <!--     <select class="pull-right1 form-control1" ng-model="manageAd.adFilterValue" ng-options="masterAd.value as masterAd.name for masterAd in manageAd.filterOptions.filter" ng-change="manageAd.adFilter(manageAd.adFilterValue);">
+      <option value=""> - Filter By - </option>
+    </select> -->
+      </div>
+
+      <div class="advertisement-table">
+        <table class="table table-striped table-hover advertiserList">
+          <tr>
+            <!-- Table Heading-->
+            <th>#</th>
+            <th> Ads Name<span class="sort-icon"><i class="fa fa-sort" aria-hidden="true"></i></th>
+          <th>Category<span class="sort-icon"><i class="fa fa-sort" aria-hidden="true"></i></th>
+          <th>Start Date<span class="sort-icon"><i class="fa fa-sort" aria-hidden="true"></i></th>
+          <th>End Date<span class="sort-icon"><i class="fa fa-sort" aria-hidden="true"></i></th>
+          <th>Status<span class="sort-icon"><i class="fa fa-sort" aria-hidden="true"></i></th>
+          <th>Advertiser Name<span class="sort-icon"><i class="fa fa-sort" aria-hidden="true"></i></th>
+          <th class="addAdvertiser " ng-click="manageAd.toggleSelectAdTypeClass()"><span class="fa-stack"><i class="fa fa-circle fa-stack-2x"></i>
+             <i class="fa fa-plus fa-stack-1x fa-inverse"></i></span>
+            </th>
+          </tr>
+          <tr>
+            <td>
+              <div class="Advertiser-cb" ng-if="manageAd.filteredList.length !== 0 ">
+                <input class="advertiser-toggle-cb" id="styled-checkbox-all" type="checkbox" value="value1" ng-model="manageAd.isAllSelected"
+                  ng-change="manageAd.toggleAllCheckbox();">
+                <label for="styled-checkbox-all"></label>
+              </div>
+            </td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td ng-show="manageAd.hideSearchClass.hideSearch">
+              <button class="btn delete-all-btn" ng-click="manageAd.deleteAllAds()">Delete All</button>
+            </td>
+          </tr>
+          <tr ng-repeat="masterAd in manageAd.filteredList | orderBy: '-updatedAt' ">
+            <td>
+              <div class="Advertiser-cb">
+                <input class="advertiser-toggle-cb" id="styled-checkbox-{{$index}}" type="checkbox" value="value1" ng-model="masterAd.selected"
+                  ng-change="manageAd.adCheckBoxToggled()">
+                <label for="styled-checkbox-{{$index}}"></label>
+              </div>
+            </td>
+            <td ng-click="manageAd.goToAd('view', masterAd.adType, masterAd[masterAd.adType].id);">{{masterAd[masterAd.adType].name}}</td>
+            <td ng-click="manageAd.goToAd('view', masterAd.adType, masterAd[masterAd.adType].id);">{{masterAd[masterAd.adType].category.name}}</td>
+            <td ng-click="manageAd.goToAd('view', masterAd.adType, masterAd[masterAd.adType].id);">{{masterAd[masterAd.adType].startDate | date:'dd MMM yyyy HH:mm'}}</td>
+            <td ng-click="manageAd.goToAd('view', masterAd.adType, masterAd[masterAd.adType].id);">{{masterAd[masterAd.adType].endDate | date:'dd MMM yyyy HH:mm'}}</td>
+            <td ng-init="status=manageAd.getStatus(masterAd[masterAd.adType].published, masterAd[masterAd.adType].startDate, masterAd[masterAd.adType].endDate)" ng-click="manageAd.goToAd('view', masterAd.adType, masterAd[masterAd.adType].id);">{{status}} </td>
+            <td ng-click="manageAd.goToAd('view', masterAd.adType, masterAd[masterAd.adType].id);">{{masterAd.createdBy.fullName}}</td>
+            <td class="action-icons">
+              <button ng-click="manageAd.goToAd('edit', masterAd.adType, masterAd[masterAd.adType].id);">
+                <span class="fa-stack"><i class="fa fa-circle fa-stack-2x "></i>
+               <i class="fa fa-pencil edit-icon fa-stack-1x fa-inverse "></i></span>
+              </button>
+               <button ng-click="manageAd.deleteModal(masterAd[masterAd.adType].id, masterAd.adType); "><span class="fa-stack
+                "><i class="fa fa-circle fa-stack-2x "></i>
+               <i class="fa fa-trash-o delete-icon fa-stack-1x fa-inverse "></i></span></button>
+            </td>
+         </tr>
+      </table>
+
+      <div ng-if="manageAd.filteredList.length===0 ">
+        <h3 class="text-uppearcase text-center ">No advertisement in this list</h3>
+      </div>
+
+      <uib-pagination boundary-links="true" total-items="manageAd.advertisementCount" ng-model="manageAd.currentPage" previous-text="&lsaquo;" ng-change="manageAd.pageChanged() " next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;
+              " items-per-page="manageAd.itemsPerPage " data-max-size="5 " boundary-links="true " class="pagination-sm ">
+      </uib-pagination>
+   </div>
+
+  <div class="adsTypeSlideOut animated slideInRight col-sm-12 " ng-class="{ 'adTypesForm': manageAd.adTypesClass.adTypesForm} ">
+    <div class="ad-category-header ">
+      <p>Create Advertisement</p>
+      <i class="fa fa-times " ng-click="manageAd.closeSlideContent() " aria-hidden="true "></i>
+    </div>
+    <div class="col-md-12 ads-categories ">
+      <ul>
+        <li> <button class="btn ad-category-btn " ui-sref="manage-ads.instantad({page: 'create'}) ">Instant Prizes</button></li>
+        <li><button class="btn ad-category-btn " ui-sref="manage-ads.lettercollectionad({page: 'create'}) ">Letter Collection</button></li>
+        <li> <button class="btn ad-category-btn " ui-sref="manage-ads.puzzlead({page: 'create'}) ">Puzzle </button></li>
+        <li> <button class="btn ad-category-btn " ui-sref="manage-ads.questad({page: 'create'}) ">Quest </button></li>
+      </ul>
+    </div>
+  </div>
+
+  <script type="text/ng-template " id="myModalContent.html ">
+    <div class="modal-header deleteAdvertiser-header ">
+      <button type="button " class="close close-advertsier-popup " ng-click="modal.cancel() " data-dismiss="modal ">&times;</button>
+      <img class="advertiserPopUpPic " src="../assets/images/default-pic.png ">
+    </div>
+    <div class="modal-body ">
+      <p class="delAdvertiser-ques ">Are you sure want to delete this Advertisement?</p>
+    </div>
+    <div class="modal-footer ">
+      <button type="button " ng-click="modal.ok() " class="btn delete-advertiser-btn ">Delete</button>
+      <button type="button " ng-click="modal.cancel() " class="btn cancel-advertiser-btn " data-dismiss="modal ">Cancel</button>
+    </div>
+  </script>
+
+
+<div ui-view></div>

@@ -1,0 +1,26 @@
+%dropdown-field{
+	padding: 16px 0;
+}
+.multiselect-parent{
+	@extend .text-left;
+	width: 65%;
+}
+.dropdown-box{
+	padding: 10px;
+	background: transparent;
+	box-shadow: none;
+	@extend .text-left;
+	@extend %width-100;
+	&:hover{
+		background-color: #fff;
+		box-shadow: none;
+	}
+	.caret {
+    position: absolute;
+    right: 10px;
+    top: 18px;
+}
+}
+.dropdown-menu.dropdown-menu-form {
+	@extend %width-100;
+}

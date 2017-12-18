@@ -1,0 +1,65 @@
+%checkbox{
+  position: relative;
+}
+%styled-checkbox {
+  opacity: 0; // hide it
+
+  & + label {
+     position: absolute;
+    cursor: pointer;
+    padding: 0;
+        top: 0;
+    left: 0;
+  }
+
+  // Box.
+  & + label:before {
+    content: '';
+    display: inline-block;
+    vertical-align: text-top;
+    width: 20px;
+    height: 20px;
+   color: transparent;
+   border:2px solid #c2c7ca;
+   border-radius: 2px;
+  }
+
+  
+  // Box checked
+  &:checked + label:before {
+    background: map-get($colors, primary);
+    border: none;
+  }
+  
+  // Disabled state label.
+  &:disabled + label {
+    color: #b8b8b8;
+    cursor: auto;
+  }
+
+  // Disabled box.
+  &:disabled + label:before {
+    box-shadow: none;
+    background: #ddd;
+  }
+
+  // Checkmark. Could be replaced with an image
+  &:checked + label:after {
+    content: '';
+    position: absolute;
+    left: 4px;
+    top: 9px;
+    background: white;
+    width: 2px;
+    height: 2px;
+    box-shadow: 
+      2px 0 0 white,
+      4px 0 0 white,
+      4px -2px 0 white,
+      4px -4px 0 white,
+      4px -6px 0 white,
+      4px -8px 0 white;
+    transform: rotate(45deg);
+    border:2px solid #fff;
+  }
+}

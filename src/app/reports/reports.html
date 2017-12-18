@@ -1,0 +1,48 @@
+<section class="main-content" ng-class="{'contentLeft': cft.myClass.contentLeft}">
+  <div class="page-view">
+   <!--page-view-->
+  <div class="col-md-12">
+   <!--div2-->
+  <div class=" page-heading">
+     <h4 class="title-semibold"><img src="../assets/images/manage_Advertisers-orange.png" alt="/">
+      <span>Reports</span>
+   </h4>
+   <p class="advertiserCount"> Total Reports {{vm.reportCount}}</p>
+    <div class="search-list">
+        <div class="input-group">
+          <input type="text" class="form-control" ng-model="searchText" ng-model-options="{debounce: 750}" ng-model-options="{debounce: 750}" ng-change="vm.checkEmpty();" placeholder="Search" aria-describedby="basic-addon1">
+            <span class="search-button input-group-addon" id="basic-addon1">
+          </span>
+        </div>
+      </div>
+
+    <select class="pull-right1 form-control1" ng-model="vm.reportFilterValue" ng-options="report.value as report.name for report in vm.filterOptions.filter" ng-change="vm.reportFilter(vm.reportFilterValue);">
+      <option value=""> - Filter By - </option>
+    </select>
+  </div>
+
+  <div class="advertisement-table">
+    <table class="table table-striped table-hover advertiserList">
+      <tr>
+        <th><a href="javascript:void(0)">Ads Name</th>
+        <th>Advertiser Name</th>
+        <th>Ad Type</th>
+        <th>Flip Count</th>
+      </tr>
+
+       <tr ng-repeat="report in filterData = (vm.reportDetails | filter : searchText) | limitTo:10:10*(vm.currentPage-1)">
+          <td >{{report.ad.name}}</td>
+          <td >{{report.ad.createdBy.fullName}}</td>
+          <td >{{report.adType}}</td>
+          <td >{{report.flipCount}}</td>
+       </tr>
+    </table>
+
+        <div ng-if="vm.reportDetails.length === 0"><h3 class="text-uppercase  text-center ">No reports in this list</h3> </div>
+
+    <!--   <uib-pagination class="pagination-sm pagination" total-items="filterData.length" ng-model="vm.currentPage" previous-text="&lsaquo;" ng-change="vm.pageChanged()" previous-text="&lsaquo;" next-text="&rsaquo;" items-per-page=10></uib-pagination> -->
+
+     <uib-pagination class="pagination-sm pagination" total-items="filterData.length" ng-model="vm.currentPage" ng-change="vm.pageChanged()" previous-text="&lsaquo;" next-text="&rsaquo;" items-per-page=10></uib-pagination>
+
+    </div>
+

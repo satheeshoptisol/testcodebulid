@@ -1,0 +1,8 @@
+.git
+.tmp
+.gitignore
+.editorconfig
+README.md
+docker-compose.yml
+node_modules
+bower_components

@@ -1,0 +1,113 @@
+/**
+ *  If you want to override some bootstrap variables, you have to change values here.
+ *  The list of variables are listed here bower_components/bootstrap-sass/assets/stylesheets/bootstrap/_variables.scss
+ */
+$navbar-inverse-link-color: #5AADBB;
+$icon-font-path: "../../bower_components/bootstrap-sass/assets/fonts/bootstrap/";
+
+
+$font-linotte : (
+  light: linotte-light,
+  semiBold: linotte-semibold,
+  bold: linotte-bold,
+  heavy: linotte-heavy,
+  regular: linotte-regular
+);
+//urls
+$url_lightwoff2:    url(../../assets/fonts/linotte_light-webfont.woff2);
+$url_lightwoff:     url(../../assets/fonts/linotte_light-webfont.woff);
+$url_regularwoff2:    url(../../assets/fonts/linotte_regular-webfont.woff2);
+$url_regularwoff:     url(../../assets/fonts/linotte_regular-webfont.woff);
+$url_boldwoff2:     url(../../assets/fonts/linotte_bold-webfont.woff2);
+$url_boldwoff:      url(../../assets/fonts/linotte_bold-webfont.woff);
+$url_heavywoff2:    url(../../assets/fonts/linotte_heavy-webfont.woff2);
+$url_heavywoff:     url(../../assets/fonts/linotte_heavy-webfont.woff);
+$url_semiBoldwoff2: url(../../assets/fonts/linotte_semi_bold-webfont.woff2);
+$url_semiBoldwoff:  url(../../assets/fonts/linotte_semi_bold-webfont.woff);
+/*Colors*/
+$colors: (
+  primary:    #fe5421,
+  secondary:  #85a4bc,
+  light:      #ebeff2,
+  dark:       #535758,
+  green:      #6fcdb5,
+  yellow:     #f9b233,
+  blue:       #019ee3,
+  brightRed:  #dd3e3e,
+  white:      #fff,
+  grey:       #aab4b9,
+  black_40:   rgba(0,0,0,0.4)
+);
+
+/*Position*/
+$positions:(
+  relative:relative,
+  absolute:absolute,
+  );
+
+/*Text Aign*/
+$textAlign: (
+  left:   left,
+  right:  right,
+  center: center
+);
+/*text-transform*/
+$textTransform: (
+  uppercase:    uppercase,
+  capitalize:   capitalize
+);
+/*Float*/
+$float:  (
+  left:   left,
+  right:  right
+);
+
+/**
+ *  Do not remove the comments below. It's the markers used by wiredep to inject
+ *  sass dependencies when defined in the bower.json of your dependencies
+ */
+// bower:scss
+// endbower
+
+.browsehappy {
+  margin: 0.2em 0;
+  background: #ccc;
+  color: #000;
+  padding: 0.2em 0;
+}
+
+.thumbnail {
+  height: 200px;
+}
+
+  img.pull-right {
+    width: 50px;
+  }
+
+  input[type='number'] {
+    -moz-appearance:textfield;
+  }
+
+// // Base stuff
+// @import "base/reset";
+// @import "base/typography";
+
+// // Components and modules
+// @import "components/buttons";
+
+//   // Sass utilities
+// @import "helpers/variables";
+// @import "helpers/mixins";
+
+// // Layout related stylesheets
+// @import "layout/header";
+// @import "layout/sidebar";
+
+// // Page-specific stylesheets
+// @import "pages/dashboard";
+/**
+ *  Do not remove the comments below. It's the markers used by gulp-inject to inject
+ *  all your sass files automatically
+ */
+// injector
+// endinjector

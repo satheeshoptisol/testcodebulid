@@ -1,0 +1,108 @@
+<div>
+	<!--div 1 -->
+	<section class="main-content"  >
+		<!--main Content-->
+		<div class="page-view" ng-class="{'contentLeft': cft.myClass.contentLeft}">
+			<div class="col-md-12" style="margin-top: 30px;">
+				<div class="col-md-8">
+					<div class="panel panel-default">
+						<div class="ads-notes-header"><p>{{vm.adName}}</p></div>
+						<div class="panel panel-body" ng-if="vm.showInstantAd">
+							<p class="ads-short-detail-1"><img src="../assets/images/ad-category.png"><span class="ads-short-category-1"> {{vm.adType}}</span><span class="ads-notes-1">{{vm.startDate}} to {{vm.endDate}}</span></p>
+							<p class="ads-short-detail-2"><img src="../assets/images/category.png"><span class="ads-short-category-2">{{vm.category}}</span><span class="ads-notes-2"> {{vm.flipCounts[0].count}} flips to win</span></p>
+						</div>
+
+						<div class="panel panel-body" ng-if="vm.showLetterCollection">
+							<p class="ads-short-detail-1"><img src="../assets/images/ad-category.png"><span class="ads-short-category-1"> {{vm.adType}}</span><span class="ads-notes-1">{{vm.startDate}} to {{vm.endDate}}</span></p>
+							<p class="ads-short-detail-2"><img src="../assets/images/category.png"><span class="ads-short-category-2">{{vm.category}}</span><span class="ads-notes-2"> {{vm.lettersCount}} letters in the Ad</span></p>
+						</div>
+
+						<div class="panel panel-body" ng-if="vm.showPuzzleAd">
+							<p class="ads-short-detail-1"><img src="../assets/images/ad-category.png"><span class="ads-short-category-1"> {{vm.adType}}</span><span class="ads-notes-1">{{vm.startDate}} to {{vm.endDate}}</span></p>
+							<p class="ads-short-detail-2"><img src="../assets/images/category.png"><span class="ads-short-category-2">{{vm.category}}</span><span class="ads-notes-2"> {{vm.imagePieceCount}} image pieces in the Ad</span></p>
+						</div>
+
+
+						<div class="panel panel-body" ng-if="vm.showQuestAd">
+							<p class="ads-short-detail-1"><img src="../assets/images/ad-category.png"><span class="ads-short-category-1"> {{vm.adType}}</span><span class="ads-notes-1">{{vm.startDate}} to {{vm.endDate}}</span></p>
+							<p class="ads-short-detail-2"><img src="../assets/images/category.png"><span class="ads-short-category-2">{{vm.category}}</span><span class="ads-notes-2"> {{vm.availablePoints}} available points</span></p>
+						</div>
+
+
+
+
+						<div class="panel-footer ad-cost-detail">
+						<p class="cost-title">Total Advertisement Cost</p> <p class="ads-cost">$50</p>
+						</div>
+					</div>
+					<div class="panel panel-default">
+						<div class="payment-heading">
+							<p>Payment Information</p>
+						</div>
+						<div class="panel-body">
+							<form  name="vm.paymentForm" method="post" ng-submit="vm.addPaymentDetails(vm.paymentForm);" novalidate>
+								<div class="card-detail">
+									<input type="text" name="cardNumber" ng-model="vm.cardNumber" placeholder="Enter Card Number" cc-format cc-number required>
+									<label >Enter Card Number</label>
+									<label for="name" ng-show="vm.paymentForm.$submitted && vm.paymentForm.cardNumber.$error.required" class="error">This field is required.</label>
+									<label for="name" ng-show="vm.paymentForm.$submitted && vm.paymentForm.cardNumber.$invalid" class="error">Invalid Card Number.</label>
+								</div>
+								<table width="100%" class="card-date">
+									<tr>
+										<td>
+											<div>
+												 <table width="100%">
+									        <tr>
+									        <div class="col-md-6">
+									          <select  class=" expMonth" name="expMonth" ng-model="vm.expMonth" ng-options="expMonth as expMonth for expMonth in vm.expMonths" max-height="150px" ng-change="vm.changeMonthErrMsg();" required>
+		                        <option value=""> - Exp Month - </option>
+									          </select>
+									          <label for="name" ng-show="vm.paymentForm.$submitted && vm.paymentForm.expMonth.$error.required" class="error">Expiry month is required.</label>
+									          <label for="name" ng-show="vm.showMonthError" class="error">Invalid Month</label>
+									          </div>
+									          <div class="col-md-6">
+									          <select class="expYear" name="expYear" ng-model="vm.expYear" ng-options="expYear as expYear for expYear in vm.expYears" max-height="150px" ng-change="vm.changeMonthErrMsg();" required>
+		                        <option value=""> - Exp Year - </option>
+									          </select>
+									          <label for="name" ng-show="vm.paymentForm.$submitted && vm.paymentForm.expYear.$error.required" class="error">Expiry year is required.</label>
+									          </div>
+									      </tr>
+									       </table>
+											</div>
+										</td>
+										<td>
+											<div class="cvv-detail">
+												<input class="cvv-number" type="text" name="cvv" ng-model="vm.cardCode" cc-cvc placeholder="CVV Number" required>
+												<label >CVV Number</label>
+													<label for="name" ng-show="vm.paymentForm.$submitted && vm.paymentForm.cvv.$error.required" class="error">CVV number is required.</label>
+											</div>
+										</td>
+									</tr>
+
+								</table>
+							<button class="btn pay-btn" ng-disabled="vm.isDisabled" ng-click="submit=true">Proceed to pay</button>
+						</form>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-4">
+					<div class="panel panel-default">
+						<div class="payment-mockup">
+							<div class="mobile-mockup">
+								<div class="device">
+									<div class="ad-image" ng-if="!vm.showVideo">
+										<img ngf-src="vm.media"/>
+									</div>
+									<div class="ad-image" ng-if="vm.showVideo">
+										 <video ngf-src="vm.media" width="120" height="140" controls/>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</section>
+</div>

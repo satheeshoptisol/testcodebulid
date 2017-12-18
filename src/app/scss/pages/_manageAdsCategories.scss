@@ -1,0 +1,28 @@
+.categoriesCount{
+	@extend %span-header;
+}
+.ads-category-table{
+	@extend %table-box;
+}
+.adsCategoryList{
+	@extend %tableListView;
+}
+.addAdsCategory{
+	color: map-get($colors,primary);
+}
+.category-btn{
+	@extend %select-modal-btn;
+}
+.category-select{
+	@extend .adsDetail;
+}
+.status-label{
+	@extend .text-left;
+}
+.category-edit{
+	@extend %margin-auto;
+}
+.dropdown-label-icon {
+  @extend .text-left;
+    width: 40px;
+}

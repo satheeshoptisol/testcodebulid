@@ -1,0 +1,126 @@
+.navbar{
+	transition:all 0.25s ease-in 0s;
+}
+.nav-search{
+	border-radius: 18px;
+	border: none;
+	background: #696E6F;
+	color: #fff;
+	position: map-get($positions,relative);
+	input{
+		background-color: transparent;
+		@extend %border-none;
+	}
+	label{
+		position: map-get($positions,absolute); 
+		right: 10px;
+		top: 10px;
+	}
+}
+.navbar-brand{
+	color: map-get($colors,white);
+	font-size: 24px;
+}
+.nav{
+	a{
+		color:map-get($colors,white);
+		cursor: pointer;
+	}
+	
+}
+.navbar-right{
+	@extend %margin-0;
+}
+.nav-user-detail{
+	position: relative;
+	img{
+		position: absolute;
+		top: 10px;
+	}
+	.nav-user-name{
+		margin-left: 38px;
+	}
+}
+.header{
+	background-color: map-get($colors,dark);
+	color: map-get($colors,white);
+	position: fixed;
+	width:100%;
+	border-radius: 0;
+	z-index: 999;
+	box-shadow: 0 0 4px 1px rgba(0, 0, 0, 0.45);
+}
+.headerWidth{
+	width: calc(100% - #{$sidebar-full-width});
+	margin-left: $sidebar-full-width;
+}
+.user-profile{
+	padding: 10px !important;
+}
+.notification{
+	margin-top:calc(#{$navbar-height} + 4px);
+	@extend %slide_right;
+	width: 30%;
+	height: 92% !important;
+
+
+	&::-webkit-scrollbar-thumb{
+		@extend %scrollbar-thumb;
+	}
+	& ::-webkit-scrollbar{
+		@extend %scrollbar;
+	}
+	li {
+    border-bottom: 1px solid #eaeaea;
+    padding: 10px 0;
+    p{
+    	margin: 0;
+    }
+}
+}
+.notification-read {
+    background: #f8f8f8 none repeat scroll 0 0;
+    color: #787878;
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+    text-transform: uppercase;
+}
+.notification-image{
+	@extend %padding-0;
+	@extend %margin-0;
+	img {
+    border: 2px solid #f0f0f0;
+    border-radius: 50%;
+    float: left;
+    height: 50px;
+    width: 50px;
+}
+}
+.notification-content{
+	@extend %padding-0;
+	@extend %margin-0;
+	span{
+		font-size: 13px;
+		color: rgba(0,0,0,0.5);
+	}
+}
+.allNotification{
+	display: block !important;
+}
+.notification-count{
+	background: map-get($colors,primary);
+    min-height: 20px;
+    min-width: 20px;
+    padding: 3px 5px;
+    position: absolute;
+    right: 0;
+    top: 4px;
+}
+.edit-profile{
+	@extend .adsDetail;
+}
+.profile-update-btn{
+	@extend %btn-primary;
+		@extend %slider-button;
+}

@@ -1,0 +1,286 @@
+/**************Advertiser Table*****************/
+.advertiserCount{
+	@extend %span-header;
+}
+.advertiser-table{
+	@extend %table-box;
+}
+.advertiserList{
+	@extend %tableListView;
+}
+		.advertiser-email{
+	text-align: left !important;
+}
+.addAdvertiser{
+	color: map-get($colors,primary);
+	border-bottom: 1px solid #eaeaea;
+}
+/*********** Preview Advertiser***************/
+.createAdvertiserForm{
+	display: block;
+	@extend .text-center;
+}
+.advertiserPreview{
+	@extend %padding-0;
+	.preview-header{
+		@extend %slideheader;
+	}
+	.advertiserPreviewContent{
+		padding: 0 30px 0 0;
+		@extend %Slider-border-right;
+	}
+}
+.accountDetailPreview{
+	@extend .text-left;
+	.acc-preview-header{
+	@extend %preview-detail-header;
+	}
+}
+.detaillist{
+	padding: 0 15px;
+	li{
+		@extend %display-table;
+		@extend %width-100;
+		padding: 18px 0;
+		border-bottom: 1px solid #ebeaea;
+		span{
+			margin-right: 8px;
+		}
+		p{
+			display: initial;
+			vertical-align: middle;
+		}
+	}
+}
+.advertiser-pic{
+	position: map-get($positions,relative);
+	img{
+		@extend %sliderUserPicture;
+	}
+	.advertiser-name{
+		font-size: 20px ;
+		margin: 16px auto 6px;
+		font-family:map-get($font-linotte,semiBold); 
+	}
+
+	.advertiser-status{
+		color: map-get($colors,primary);
+		font-style:italic;  
+	}
+}
+	.status-toggle {
+    float: right;
+}
+/*****************Advertiser Slide**********************/
+.createadvertiserSlideOut{
+	@extend %slide_right;
+	width: 56%;
+
+
+	&::-webkit-scrollbar-thumb{
+		@extend %scrollbar-thumb;
+	}
+	& ::-webkit-scrollbar{
+		@extend %scrollbar;
+	}
+}
+.createAdvertiser{
+	@extend %padding-0;
+	.createAdvertiser-header{
+		@extend %slideheader;
+		i{
+			@extend %content-middle;
+		}
+	}
+	.createAdvertiser-btn{
+		@extend %btn-primary;
+		@extend %slider-button;
+	}
+}
+.advertiserForm{
+		@extend %slideForm;
+	}
+.AdvertiserDetails{
+	@extend %lineInputField;
+	@extend .text-left;
+	@extend %display-block;
+	padding: 16px 16px;
+	position:map-get (positions,relative);
+	input{
+		width: 90%;
+	}
+	.error{
+		float: right;
+	}
+	label{
+		left: 44px;
+	}
+}
+/*****************Edit Advertiser******************/
+.editAdvertiserForm{
+	@extend .createAdvertiserForm;
+}
+.editAdvertiserSlideOut{
+	@extend .createadvertiserSlideOut;
+}
+.editAdvertiserPreview{
+	@extend .advertiserPreview;
+}
+.editAccountDetailPreview{
+	@extend .accountDetailPreview;
+}
+.editDetaillist{
+	@extend .detaillist;
+}
+.editAdvertiser{
+	@extend .createAdvertiser;
+}
+.editAdvertiser-header{
+	@extend .createAdvertiser-header;
+}
+.editAdvertiser-fields{
+	@extend .advertiserForm;
+}
+.editAdvertier-pic{
+	position: map-get($positions,relative);
+	span{
+		position: map-get($positions,relative);
+		.userimg{
+			@extend %sliderUserPicture;
+		}
+		.camera-icon{
+			position: absolute;
+			top: 36px;
+			right: 2px;
+		}
+	}
+}
+.advertiser-status-toggle{
+	@extend %switch;
+	display: table-cell;
+}
+.advertiser-status-label{
+	@extend .text-left;
+	font-size: 18px;
+}
+.advertiser-status-toggle{
+	@extend .text-right;
+
+}
+/******************** Account Detail Slide Out ******************/
+.advertiserDetailSlideOut{
+	@extend %slide_right;
+	width: 31%;
+}
+.viewAdvertiserDetail{
+	display: block;
+	@extend .text-center;
+}
+.advertiserDetailHeader{
+		@extend %slideheader;
+		i{
+			@extend %content-middle;
+		}
+	}
+.advertiserAccountDetail{
+	@extend .accountDetailPreview;
+}
+.advertiserDetailList{
+	@extend .detaillist;
+}
+.advertiseradsCount{
+	margin: 32px auto;
+	ul{
+		@extend %padding-0;
+		li{
+			display: inline-block;
+			width: 25%;
+			vertical-align: middle;
+			@extend %Slider-border-right;
+			&:last-child{
+				@extend %border-none;
+			}
+		}
+	}
+}
+.advertiserCountValue{
+	font-family: linotte-semibold;
+    font-size: 20px;
+    margin-bottom: 4px;
+}
+.advertiserCountName{
+	color: map-get($colors,secondary);
+	font-family: map-get($font-linotte,semiBold);
+	font-size: 16px;
+}
+.advertiserEdit-btn{
+	@extend %btn-primary-small;
+	@extend %slider-button;
+}
+/****************************Modal Delete****************/
+.deleteAdvertiser-header{
+	@extend %delete-popup-header;
+}
+.delAdvertiser-ques{
+	@extend %modal-ques;
+}
+.delete-advertiser-btn{
+	@extend %select-modal-btn;
+}
+.cancel-advertiser-btn{
+	@extend %cancel-modal-btn;
+}
+.advertiserPopUpPic{
+	@extend %pop-userImg;
+}
+.close-advertsier-popup{
+	@extend %popUp-close;
+}
+
+.adsTypeSlideOut{
+	width: 30%;
+	@extend %slide_right;
+	
+	&::-webkit-scrollbar-thumb{
+		@extend %scrollbar-thumb;
+	}
+	& ::-webkit-scrollbar{
+		@extend %scrollbar;
+	}
+}
+.preview-username {
+    font-size: 20px;
+    font-weight: bold;
+    margin: 10px 0 0;
+}
+.Advertiser-cb{
+	 @extend %checkbox;
+}
+.advertiser-toggle-cb{
+	@extend %styled-checkbox;
+}
+.delete-all-btn{
+	font-size: 13px;
+	background-color: map-get($colors,brightRed);
+	border-radius: 3px;
+	color: #fff;
+	text-transform: uppercase;
+	font-family: map-get($font-linotte, semiBold);
+	padding: 5px;
+}
+.page-heading {
+    position: relative;
+}
+.search-list {
+    bottom: 0;
+    position: absolute;
+    right: 0;
+    width: 30%;
+    input{
+    	border-right: 0;
+    	box-shadow: none;
+    }
+    .search-button{
+    	background-color: #fff;
+    }
+}

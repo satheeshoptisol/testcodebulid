@@ -1,0 +1,96 @@
+.ads-notes-header{
+@extend .advertiserDetailHeader;
+margin-bottom: 0;
+}
+@for $i from 1 through 2{
+	.#{ads-short-detail}-#{$i}{
+		position: relative;
+		&:nth-child(1){
+			margin-bottom:20px;
+		}
+		}
+	.#{ads-notes}-#{$i}{
+		float: right;
+  	 font-weight: 600;
+  	 color: #337ab7;
+		}
+		.ads-short-category-#{$i}{
+			font-size: 20px;
+    	left: 20px;
+  	  position: absolute;
+   		top: 0;
+		}
+}
+.card-detail{
+		@extend %lineInputField;
+	@extend .text-center;
+	@extend %display-block;
+	padding: 16px 0;
+	position:map-get (positions,relative);
+	input{
+		width: 100%;
+	}
+	.error{
+		float: left;
+	}
+}
+.card-date{
+	td{
+		.expire-date{ float: left; } 
+		
+		input{
+			width: 96%;
+			
+		}
+	}
+}
+.cvv-detail{
+	@extend .card-detail;
+	label{
+		margin-left: 10px;
+	}
+	.cvv-number{
+	float: right;
+}
+}
+.payment-heading{
+	@extend .ads-notes-header;
+}
+.payment-mockup {
+    padding: 20px 0;
+}
+.pay-btn{
+	@extend %btn-primary;
+	float: right;
+	margin: 20px 0;
+}
+.preview-collect{
+	@extend .text-center;
+	@extend %width-100;
+}
+.ad-cost-detail{
+	background-color:lighten(#6fcdb5, 10%) ;
+	color: #fff;
+	font-weight: bold;
+	padding: 4px 6px;
+}
+.cost-title{
+	float: left;
+	font-size: 16px;
+	padding: 5px 0;
+	@extend %margin-0;
+}
+.ads-cost{
+	@extend .text-right;
+	font-size: 22px;
+	@extend %margin-0;
+}
+.expMonth{
+	@extend %border-bottom;
+	border-bottom: 1px solid #ebeaea;
+	padding: 16px 0;
+	@extend %width-100;
+}
+.expYear{
+	@extend .expMonth;
+}

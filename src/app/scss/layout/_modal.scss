@@ -1,0 +1,30 @@
+$color_monza_approx: #e72e2e;
+%popUp-close{
+	color:map-get($colors,white);
+	opacity: 1;
+}
+/****************delete Popup ***************/
+%delete-popup-header {
+	background: linear-gradient(45deg, map-get($colors,brightRed) 0, map-get($colors,brightRed) 1%, $color_monza_approx 100%);
+	filter: progid:dximagetransform.microsoft.gradient(startcolorstr='$color_monza_approx', endcolorstr='map-get($colors,brightRed)',gradienttype=1 );
+	@extend .text-center;
+}
+%pop-userImg{
+		width: 93px;
+		border-radius: 50%;
+		border: 3px solid rgba(255,255,255,0.3);
+		box-shadow: 0px 0px 7px 0px rgba(0,0,0,0.2);
+}
+%modal-ques{
+	font-size: 20px;
+	margin: 20px 0;
+	@extend .text-center;
+}
+%select-modal-btn{
+	@extend %btn-primary;
+	background-color: map-get($colors,green);
+	padding: 6px 12px;
+}
+%cancel-modal-btn{
+	@extend %lightButton;
+}

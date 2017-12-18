@@ -1,0 +1,30 @@
+.fontface-normal{
+	font-weight: normal;
+	font-style: normal;
+}
+@font-face {
+	font-family:map-get($font-linotte,bold);
+	src: $url_boldwoff2 format('woff2'), $url_boldwoff format('woff');
+	@extend .fontface-normal;
+}
+@font-face {
+	font-family:map-get($font-linotte,heavy);
+	src: $url_heavywoff2 format('woff2'), $url_heavywoff format('woff');
+	@extend .fontface-normal;
+}
+@font-face {
+	font-family:map-get($font-linotte,light);
+	src: $url_lightwoff2 format('woff2'), $url_lightwoff format('woff');
+	@extend .fontface-normal;
+}
+@font-face {
+	font-family:map-get($font-linotte,semiBold);
+	src: $url_semiBoldwoff2 format('woff2'), $url_semiBoldwoff format('woff');
+	@extend .fontface-normal;
+}
+@font-face {
+	font-family: map-get($font-linotte,regular);
+	src: $url_regularwoff2 format('woff2'),$url_regularwoff format('woff');
+	@extend .fontface-normal;
+
+}

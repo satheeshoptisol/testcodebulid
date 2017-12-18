@@ -1,0 +1,44 @@
+/**************************Toggle Switch************************/
+%switch{
+	position:map-get($positions,relative);
+	width: 60px;
+	height: 32px;
+	display: inline-block;
+	input{
+		display: none;
+		&:checked + .slider {
+			background-color:map-get($colors,blue);
+		}
+		&:focus + .slider {
+			box-shadow: 0 0 1px map-get($colors,blue);
+		}
+		&:checked + .slider:before {
+			transform: translateX(26px);
+		}
+	}
+}
+.slider {
+	position:map-get($positions,absolute);
+	top: 0;
+	left: 0;
+	bottom: 0;
+	transition: 0.4s;
+	background-color: #fdfdfd;
+	width: 60px;
+	height: 32px;
+	border-radius: 30px;
+	box-shadow: 0 0 14px 0 rgba(0,0,0,0.2) inset;
+	&:before{
+		position:map-get($positions,absolute);
+		content: "";
+		transition: 0.4s;
+		width: 28px;
+		height: 28px;
+		background-color:map-get($colors,white);
+		box-shadow: 0 0 7px 0px rgba(0,0,0,0.4);
+		left: 4px;
+		top: 2px;
+		@extend %border-radius-50;
+	}
+}
+/**************************Toggle Switch************************/

@@ -1,0 +1,497 @@
+ <!----*******************Create Ad Slide Out *********************-->
+   <div class="createadvertiserSlideOut animated slideInRight" ng-class="{'createAdvertisementForm': vm.myClass.createAdvertisementForm}">
+   <div class="advertiserPreview col-md-6">
+      <div class="preview-header">
+         <p>Preview</p>
+      </div>
+        <div class="mobile-mockup">
+          <div class="device" ng-show="vm.showMedia">
+            <div class="ad-image" ng-show="vm.showImage">
+               <img ngf-src="vm.media[0].url"/>
+            </div>
+            <!-- <button class="btn collect-btn">Collect!!</button> -->
+         </div>
+      </div>
+   </div>
+   <!-- Create Advertisement Form-->
+   <div class="createAdvertisement col-md-6">
+   <div class="advertiserDetailHeader">
+
+      <p>Quest Ad</p>
+      <i class="fa fa-times" ng-click="vm.closeSlideContent()" aria-hidden="true"></i>
+   </div>
+   <div class="advertisement-border">
+   <form class="adsForm" name="vm.createAdsForm" method="post" novalidate onkeypress="if (event.keyCode == 13) { return false;}">
+      <div class="adsDetail">
+         <span><img src="../assets/images/title.png"></span>
+         <input type="text" name="postName" ng-model="vm.ads.postName" placeholder="Post Name" required>
+         <label >Post Name</label>
+         <label for="name" ng-show="vm.createAdsForm.$submitted && vm.createAdsForm.postName.$error.required" class="error">This field is required.</label>
+      </div>
+
+      <div class="adsDetail">
+        <table width="100%">
+          <tr>
+            <td class="dropdown-label-icon"><span><img src="../assets/images/title.png"></span></td>
+            <td class="ads-description">
+              <textarea type="text" name="description" ng-model="vm.ads.description" placeholder="Description"></textarea>
+           </td>
+           </tr>
+         </table>
+      </div>
+
+    <div class="adsDetail">
+      <table width="100%">
+      <tr>
+        <td class="dropdown-label-icon"><span><img src="../assets/images/category.png"></span></td>
+        <td>
+        <div class="category-dropdown" isteven-multi-select input-model="vm.categoryTypes" output-model="vm.getAdCategoryModel" button-label="name" item-label="name" tick-property="ticked" selection-mode="single" max-height="100px" translation="vm.localLang" helper-elements=" all none" on-item-click="vm.changeErrorValue()">
+        </div>
+         <label for="name" class="error" ng-show="vm.categoryMessage">This field is required</label>
+        </td>
+      </tr>
+      </table>
+    </div>
+
+
+      <div class="adsDetail">
+         <span><img src="../assets/images/title.png"></span>
+         <input type="text" name="noOfAvailablePoints" ng-model="vm.ads.noOfAvailablePoints" placeholder="No. of Available Points" ng-pattern="/^-?[0-9][^\.]*$/" required>
+         <label >No. of Available Points</label>
+         <label for="name" ng-show="vm.createAdsForm.$submitted && vm.createAdsForm.noOfAvailablePoints.$error.required" class="error">This field is required.</label>
+         <label for="name" ng-show="vm.createAdsForm.$submitted && vm.createAdsForm.noOfAvailablePoints.$error.pattern" class="error">Enter only numbers.</label>
+      </div>
+
+      <div class="adsDetail">
+          <span><img src="../assets/images/calender.png"></span>
+          <input type="text" name="start_date" placeholder="Start Date & Time" datetime-picker="dd MMM yyyy HH:mm" ng-model="vm.ads.startDate" datepicker-options="vm.dateOptions1" is-open="vm.startDateCalenderIsOpen" ng-click="vm.openStartCalendar($event, prop)" ng-change='vm.checkErr(vm.ads.startDate, vm.ads.endDate)' readonly="readonly" required>
+          <label>Start Date</label>
+          <label for="name" ng-show="vm.createAdsForm.$submitted && vm.createAdsForm.start_date.$error.required" class="error">This field is required.</label>
+          <label for="name" ng-show="vm.startCalMessage" class="error">{{vm.startErrMessage}}</label>
+      </div>
+
+       <div class="adsDetail">
+          <span><img src="../assets/images/calender.png"></span>
+          <input type="text" name="end_date" placeholder="End Date & Time" datetime-picker="dd MMM yyyy HH:mm" ng-model="vm.ads.endDate" datepicker-options="vm.dateOptions1" is-open="vm.endDateCalenderIsOpen" show-meridian="false" ng-click="vm.openEndCalendar($event, prop)" ng-change='vm.checkErr(vm.ads.startDate, vm.ads.endDate)' readonly="readonly" required>
+          <label>End Date</label>
+          <label for="name" ng-show="vm.createAdsForm.$submitted && vm.createAdsForm.end_date.$error.required" class="error">This field is required.</label>
+          <label for="name" class="error" ng-show="vm.calMessage">{{vm.errMessage}}</label>
+      </div>
+
+      <div class="adsDetail" ng-show="vm.showAssignAdvertiser">
+        <table width="100%">
+          <tr>
+            <td class="dropdown-label-icon"> <span><img src="../assets/images/assign-advertiser.png"></span></td>
+            <td>
+              <div class="category-dropdown" isteven-multi-select input-model="vm.advertiserList" output-model="vm.getAdvertiserListModel" button-label="fullName" item-label="fullName" tick-property="ticked" selection-mode="single" translation="vm.advertiserLang" helper-elements=" all none" on-item-click="vm.changeErrorValue()">
+              </div>
+            </td>
+          </tr>
+       </table>
+      </div>
+   <p class="ads-target-header">Target Audience</p>
+   <div>
+
+   <table class="target-instant" width="94%">
+      <!-- OS toggle  -->
+      <tr>
+         <td class="target-name">OS</td>
+         <td>
+            <label class="target-ad-toggle">
+               <input type="checkbox" ng-model="vm.ads.instantOSModel" ng-change="vm.instantOS(vm.ads.instantOSModel)">
+               <div class="ad-slider">
+            </label>
+         </td>
+      </tr>
+      <!-- OS toggle tr end  -->
+      <tr ng-show="vm.showOSDropDown">
+         <!-- OS dropdown column-->
+         <td colspan="2">
+            <div class="ad-target-list">
+             <div isteven-multi-select input-model="vm.osTypes" output-model="vm.osTypeModel" button-label="name"
+                  item-label="name" helper-elements=" all none" tick-property="ticked" on-item-click="vm.osSelection();">
+              </div>
+            </div>
+            <label class="error" ng-if="vm.osError">{{vm.osErrorMessage}}<br/></label>
+            <!-- OS dropdown end -->
+         </td>
+      </tr>
+      <!-- OS dropdown column end -->
+      <!-- OS toggle end  -->
+      <!-- Gender  toggle -->
+      <tr>
+         <td class="target-name">Gender</td>
+         <td class="instant-toggle">
+            <label class="target-ad-toggle">
+               <input type="checkbox" ng-model="vm.ads.instantGenderModel" ng-change="vm.instantGender(vm.ads.instantGenderModel)">
+               <div class="ad-slider">
+            </label>
+         </td>
+      </tr>
+      <!-- Gender toggle tr end -->
+      <tr ng-show="vm.showGenderDropDown">
+         <!-- Gender dropdown column-->
+         <td colspan="2">
+            <div class="ad-target-list">
+               <!-- Gender dropdown-->
+                <div isteven-multi-select input-model="vm.genderTypes" selection-mode="single" output-model="vm.genderTypeModel" button-label="label" item-label="label" helper-elements=" all none" tick-property="ticked" on-item-click="vm.genderSelection();">
+              </div>
+            </div>
+            <label class="error" ng-if="vm.genderError">{{vm.genderErrorMessage}}<br/></label>
+            <!-- Gender dropdown end -->
+         </td>
+      </tr>
+
+      <!-- Country  toggle -->
+      <tr>
+         <td class="target-name">Country</td>
+         <td class="instant-toggle">
+            <label class="target-ad-toggle">
+               <input type="checkbox" ng-model="vm.ads.instantCountryModel" ng-change="vm.instantCountry(vm.ads.instantCountryModel)">
+               <div class="ad-slider">
+            </label>
+         </td>
+      </tr>
+      <!-- Country toggle tr end -->
+      <!-- Country dropdown column-->
+      <tr ng-show="vm.showCountryDropDown">
+      <td colspan="2">
+      <!-- Country dropdown-->
+      <div class="ad-target-list">
+       <div isteven-multi-select input-model="vm.countryTypes" output-model="vm.countryModel" button-label="nicename" item-label="nicename" max-height="100px" helper-elements=" all none" tick-property="ticked" on-item-click="vm.countrySelection();">
+        </div>
+      </div>
+      <label class="error" ng-if="vm.countryError">{{vm.countryErrorMessage}}<br/></label>
+      <!-- Country dropdown end -->
+      </td>
+      </tr>
+      <!-- Country dropdown column end -->
+      <!-- Country  toggle end -->
+
+      <!-- Zipcode  toggle -->
+      <tr>
+      <td class="target-name">Zipcode</td>
+      <td class="instant-toggle"> <label class="target-ad-toggle"><input type="checkbox" ng-model="vm.ads.zipCodeModel" ng-change="vm.zipCodeChange(vm.ads.zipCodeModel)"><div class="ad-slider"></label></td>
+      </tr>
+      <!-- Zipcode toggle tr end -->
+      <!-- Zipcode field-->
+        <tr ng-show="vm.showZipCode">
+          <td colspan="2">
+            <div class="zipcodefield">
+              <input type="text" name="zipCode" ng-model="vm.ads.zipCode" placeholder="Zipcode">
+              <label>Zipcode</label>
+              <span class="zipcode-plus" ng-click="vm.addZipCode(vm.ads.zipCode)"> <i class="fa fa-plus-circle" aria-hidden="true"></i>
+            </span>
+            </div>
+            <label class="error" ng-if="vm.zipCodeError">{{vm.zipCodeErrorMessage}}</label>
+          </td>
+        </tr>
+      <!-- Country field end -->
+      <!-- Country  toggle end -->
+  </table>
+
+
+
+
+   </div>
+   <div class="zipcode-list">
+    <ul>
+      <li ng-repeat="zipcode in vm.zipCodeArray track by $index">{{ zipcode }} <button ng-click="vm.deleteZipCode()">x</button></li>
+    </ul>
+    </div>
+    <div ng-show="vm.progressMessage">
+      <div class="progress">
+        <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: {{vm.Progress}}%;">
+          {{vm.Progress | number:0}}%
+        </div>
+      </div>
+      <div><button ng-click="vm.deleteFile();">x</button></div>
+    </div>
+    <div ng-if="vm.showName">{{vm.mediaName}}
+    </div>
+    <label for="name" class="error" ng-show="vm.mediaErrorMessage">Please Upload Image</label>
+        <label for="name" class="error" ng-show="vm.maxSizeError">Maximum allowed size is 100MB</label>
+
+   <div class="adsUploadButton"><button class="adsUpload" type="button" ngf-pattern="image/*" ngf-accept="'image/*'" ngf-select="vm.uploadFiles($files)" ngf-multiple="false" ngf-max-size="100MB" ng-required>Upload Image</button></div>
+   <button type="submit" ng-disabled="vm.isDisabled" ng-click="vm.publishAdvertisement(vm.createAdsForm, 'questAds');" class="btn createAdvertisement-btn">Publish</button>
+   <button type="submit" ng-disabled="vm.isDisabled" ng-click="vm.postAdvertisement(vm.createAdsForm, 'questAds');" class="btn adsPreview-btn">Create</button>
+   </form>
+   </div>
+   </div><!-- Create Advertisement form end-->
+   </div>
+   <!----*******************Create Ad Slide Out end *********************-->
+
+
+   <!----*******************Edit Ad Slide Out *********************-->
+   <div class="createadvertiserSlideOut animated slideInRight" ng-class="{'editAdvertisementForm': vm.editAdClass.editAdvertisementForm}">
+   <div class="advertiserPreview col-md-6">
+      <div class="preview-header">
+         <p>Preview</p>
+      </div>
+     <div class="mobile-mockup">
+         <div class="device">
+            <div class="ad-image" ng-show="vm.showImage">
+               <img ngf-src="vm.editAds.media[0].url"/>
+            </div>
+            <!-- <button class="btn collect-btn">Collect!!</button> -->
+         </div>
+      </div>
+   </div>
+   <!-- Create Advertisement Form-->
+   <div class="createAdvertiser col-md-6">
+   <div class="createAdvertiser-header">
+      <p>Update Quest Ad</p>
+      <i class="fa fa-times" ng-click="vm.closeSlideContent()" aria-hidden="true"></i>
+   </div>
+   <form class="adsForm" name="vm.editAdsForm" method="post" novalidate onkeypress="if (event.keyCode == 13) { return false;}">
+      <div class="adsDetail">
+         <span><img src="../assets/images/title.png"></span>
+         <input type="text" name="postName" ng-model="vm.editAds.name" placeholder="Post Name" required>
+         <label >Post Name</label>
+         <label for="name" ng-show="vm.editAdsForm.$submitted && vm.editAdsForm.postName.$error.required" class="error">This field is required.</label>
+      </div>
+
+      <div class="adsDetail">
+        <table width="100%">
+          <tr>
+            <td class="dropdown-label-icon"><span><img src="../assets/images/title.png"></span></td>
+            <td class="ads-description">
+              <textarea type="text" name="description" ng-model="vm.editAds.description" placeholder="Description"></textarea>
+           </td>
+           </tr>
+         </table>
+      </div>
+
+
+       <div class="adsDetail">
+        <table width="100%">
+        <tr>
+          <td class="dropdown-label-icon"><span><img src="../assets/images/category.png"></span></td>
+          <td>
+          <div class="category-dropdown" isteven-multi-select input-model="vm.editAds.categoryTypes" output-model="vm.editAds.categoryTypeModel" button-label="name" item-label="name" tick-property="ticked" selection-mode="single" translation="vm.localLang" helper-elements=" all none" max-height="100px" on-item-click="vm.changeErrorValue()">
+          </div>
+            <label for="name" class="error" ng-show="vm.categoryMessage">This field is required</label>
+          </td>
+        </tr>
+      </table>
+      </div>
+
+      <div class="adsDetail">
+         <span><img src="../assets/images/title.png"></span>
+         <input type="text" name="noOfAvailablePoints" ng-model="vm.editAds.noOfAvailablePoints" placeholder="No. of Available Points" ng-pattern="/^-?[0-9][^\.]*$/" required>
+         <label >No. of Available Points</label>
+         <label for="name" ng-show="vm.editAdsForm.$submitted && vm.editAdsForm.noOfAvailablePoints.$error.required" class="error">This field is required.</label>
+         <label for="name" ng-show="vm.editAdsForm.$submitted && vm.editAdsForm.noOfAvailablePoints.$error.pattern" class="error">Only numbers allowed.</label>
+      </div>
+
+      <div class="adsDetail">
+          <span><img src="../assets/images/calender.png"></span>
+          <input type="text" name="start_date" placeholder="Start Date & Time" datetime-picker="dd MMM yyyy HH:mm" ng-model="vm.editAds.startDate" ng-value="vm.editAds.startDate" datepicker-options="vm.dateOptions1" is-open="vm.startDateCalenderIsOpen" ng-change='vm.checkErr(vm.editAds.startDate, vm.editAds.endDate)' ng-click="vm.openStartCalendar($event, prop)" readonly="readonly">
+          <label>Start Date</label>
+          <label for="name" ng-show="vm.editAdsForm.$submitted && vm.editAdsForm.start_date.$error.required" class="error">This field is required.</label>
+          <label for="name" ng-show="vm.startCalMessage" class="error">{{vm.startErrMessage}}</label>
+      </div>
+
+       <div class="adsDetail">
+          <span><img src="../assets/images/calender.png"></span>
+          <input type="text" name="end_date" placeholder="End Date & Time" datetime-picker="dd MMM yyyy HH:mm" ng-model="vm.editAds.endDate" ng-value="vm.editAds.endDate" datepicker-options="vm.dateOptions1" is-open="vm.endDateCalenderIsOpen" ng-change='vm.checkErr(vm.editAds.startDate, vm.editAds.endDate)' show-meridian="false" ng-click="vm.openEndCalendar($event, prop)" readonly="readonly" >
+          <label>End Date</label>
+          <label for="name" ng-show="vm.editAdsForm.$submitted && vm.editAdsForm.end_date.$error.required" class="error">This field is required.</label>
+          <label for="name" ng-show="vm.calMessage" class="error">{{vm.errMessage}}</label>
+      </div>
+
+    <p class="ads-target-header">Target Audience</p>
+      <div>
+      <table class="target-instant" width="94%">
+         <!-- OS toggle  -->
+         <tr>
+            <td class="target-name">OS</td>
+            <td>
+               <label class="target-ad-toggle">
+                  <input type="checkbox" ng-model="vm.os" ng-change="vm.instantOS(vm.os)">
+                  <div class="ad-slider">
+               </label>
+            </td>
+         </tr>
+         <!-- OS toggle tr end  -->
+         <tr ng-show="vm.showOSDropDown"> <!-- OS dropdown column-->
+         <td colspan="2">
+         <div class="ad-target-list"> <!-- OS dropdown-->
+          <div isteven-multi-select input-model="vm.editAds.osTypes" output-model="vm.editAds.osTypeModel" button-label="name" item-label="name"  helper-elements=" all none" tick-property="ticked" on-item-click="vm.osSelection();">
+          </div>
+         </div> <!-- OS dropdown end -->
+         <label class="error" ng-if="vm.osError">{{vm.osErrorMessage}}<br/></label>
+         </td>
+         </tr>
+         <!-- OS dropdown column end -->
+         <!-- OS toggle end  -->
+         <!-- Gender  toggle -->
+         <tr>
+            <td class="target-name">Gender</td>
+            <td class="instant-toggle">
+               <label class="target-ad-toggle">
+                  <input type="checkbox" ng-model="vm.instantGenderModel" ng-change="vm.instantGender(vm.instantGenderModel)">
+                  <div class="ad-slider">
+               </label>
+            </td>
+         </tr>
+         <!-- Gender toggle tr end -->
+         <tr ng-show="vm.showGenderDropDown"> <!-- Gender dropdown column-->
+         <td colspan="2">
+         <div class="ad-target-list"> <!-- Gender dropdown-->
+          <div isteven-multi-select input-model="vm.editAds.genderTypes" selection-mode="single" output-model="vm.editAds.genderTypeModel" button-label="label" helper-elements=" all none"
+            item-label="label" tick-property="ticked" on-item-click="vm.genderSelection();">
+          </div> <!-- Gender dropdown end -->
+        </div>
+          <label class="error" ng-if="vm.genderError">{{vm.genderErrorMessage}}<br/></label>
+         </td>
+         </tr>
+         <!-- Gender dropdown column end -->
+         <!-- Gender toggle end -->
+
+         <!-- Country  toggle -->
+         <tr>
+         <td class="target-name">Country</td>
+         <td class="instant-toggle"> <label class="target-ad-toggle"><input type="checkbox" ng-model="vm.instantCountryModel" ng-change="vm.instantCountry(vm.instantCountryModel)"><div class="ad-slider"></label></td>
+         </tr>
+         <!-- Country toggle tr end -->
+         <!-- Country dropdown column-->
+         <tr ng-show="vm.showCountryDropDown">
+         <td colspan="2">
+         <!-- Country dropdown-->
+         <div class="ad-target-list">
+          <div isteven-multi-select input-model="vm.editAds.countryTypes" output-model="vm.editAds.countryModel" button-label="nicename" item-label="nicename" helper-elements=" all none" max-height="100px" tick-property="ticked" on-item-click="vm.countrySelection();">
+          </div>
+        </div>
+        <label class="error" ng-if="vm.countryError">{{vm.countryErrorMessage}}<br/></label>
+         <!-- Country dropdown end -->
+         </td>
+         </tr>
+         <!-- Country dropdown column end -->
+         <!-- Country  toggle end -->
+
+         <!-- Zipcode  toggle -->
+     <tr>
+            <td class="target-name">Zipcode</td>
+            <td class="instant-toggle">
+               <label class="target-ad-toggle">
+                  <input type="checkbox" ng-model="vm.zipCodeModel" ng-change="vm.zipCodeChange(vm.zipCodeModel)">
+                  <div class="ad-slider">
+               </label>
+            </td>
+         </tr>
+
+
+         <!-- Zipcode toggle tr end -->
+         <!-- Zipcode field-->
+         <tr ng-show="vm.showZipCode">
+         <td colspan="2">
+         <div class="zipcodefield">
+         <input type="text" ng-model="vm.editAds.zipCode" placeholder="Zipcode">
+         <label >Zipcode</label>
+         <span class="zipcode-plus" ng-click="vm.addZipCode(vm.editAds.zipCode)"> <i class="fa fa-plus-circle" aria-hidden="true"></i>
+         </div>
+          <label class="error" ng-if="vm.zipCodeError">{{vm.zipCodeErrorMessage}}</label>
+         </td>
+         </tr>
+         <!-- Country field end -->
+         <!-- Country  toggle end -->
+      </table>
+      </div>
+
+      <div class="zipcode-list" ng-show="vm.showZipCodeArray">
+      <ul>
+        <li ng-repeat="zipcode in vm.zipCodeArray track by $index">{{ zipcode }} <button ng-click="vm.deleteZipCode($index)">x</button></li>
+      </ul>
+      </div>
+
+
+      <div ng-if="vm.showName">{{vm.mediaName}}
+      </div>
+      <div ng-if="vm.progressMessage">
+       <div class="progress">
+      <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: {{vm.Progress}}%;">
+          {{vm.Progress | number:0}}%
+      </div></div>
+        <div><button type="button" ng-click="vm.deleteFile();">x</button></div>
+      </div>
+    <label for="name" class="error" ng-show="vm.editMediaErrorMsg">Please Upload Image</label>
+      <label for="name" class="error" ng-show="vm.maxSizeError">Maximum allowed size is 100MB</label>
+
+    <!-- </div> -->
+     <div class="adsUploadButton"><button class="adsUpload" type="button" ngf-pattern="image/*" ngf-accept="'image/*'" ngf-select="vm.uploadFiles($files)" ngf-multiple="false" ngf-max-size="100MB"  ng-required>Upload Image</button></div>
+    <span ng-hide="vm.hidePublished">
+      <button type="button" ng-disabled="vm.editDisabled" ng-click="vm.publishEditedAdvertisement(vm.editAdsForm);" class="btn createAdvertisement-btn">Publish</button>
+    </span>
+    <button type="submit" ng-disabled="vm.editDisabled" ng-click="vm.editAdvertisement(vm.editAdsForm);" class="btn createAdvertiser-btn">Update</button>
+   </form>
+   </div><!-- Create Advertisement form end-->
+   </div>
+   <!--*******************Edit Ad Slide Out end *********************-->
+   <!-- *******************Preview Advertisment********************-->
+   <!--  <div class="createadvertiserSlideOut animated slideInRight" ng-class="{'viewAdvertisement': vm.viewAdClass.viewAdvertisement}"> -->
+    <div class="createadvertiserSlideOut animated slideInRight" ng-class="{'viewAdvertisement': vm.viewAdClass.viewAdvertisement}">
+      <div class="advertiserPreview col-md-6 col-sm-12">
+      <div class="preview-header">
+         <p>Preview</p>
+      </div>
+      <div class="mobile-mockup">
+         <div class="device" ng-show="vm.showMedia">
+            <div class="ad-image" ng-show="vm.showImage">
+              <img ngf-src="vm.viewAdvertisement.media[0].url"/>
+            </div>
+            <!-- <button class="btn collect-btn">Collect!!</button> -->
+         </div>
+      </div>
+      <div class="advertiseradsCount">
+   <ul>
+   <li><p class="advertiserCountValue">0</p><p class="advertiserCountName">Prize</p></li>
+   <li><p class="advertiserCountValue">0</p><p class="advertiserCountName">Views</p></li>
+   </ul>
+   </div>
+   </div>
+   <div class="editAdvertiserPreview col-md-6 col-sm-12">
+   <div class="advertiserDetailHeader">
+   <p>Advertisement Detail</p>
+   <i class="fa fa-times " ng-click="vm.closeSlideContent()" aria-hidden="true"></i>
+   </div>
+   <div>
+   <!-- <div class="advertiser-pic">
+   <p>{{vm.viewAdvertisement.name}}</p>
+   </div> -->
+
+   <div class="advertiserAccountDetail">
+   <ul class="advertiserDetailList">
+   <li>
+      <span><img src="../assets/images/title.png"></span>
+      <p>{{vm.viewAdvertisement.name}}</p>
+   </li>
+   <li>
+   <span><img src="../assets/images/birthday.png"></span>
+   <p>{{vm.viewAdvertisement.noOfAvailablePoints}}</p>
+   </li>
+   <li>
+   <span><img src="../assets/images/calender.png"></span>
+   <p>{{vm.viewAdvertisement.startDate | date:'dd MMM yyyy HH:mm'}} <span>to</span> {{vm.viewAdvertisement.endDate | date:'dd MMM yyyy HH:mm'}}</p>
+   </li>
+   <li>
+   <span><img src="../assets/images/assign-advertiser.png"></span>
+   <p>{{vm.viewAdvertisement.createdBy.fullName}}</p>
+   </li>
+   </ul>
+   </div>
+   <button type="submit" ng-click="vm.toggleEditAdClass(vm.viewAdvertisement.id, 'questAds');" class="btn advertiserEdit-btn">Update</button>
+   </div> <!--Preview Edit Advertiser End-->
+   </div>
+   </div><!--Preview Edit Advertiser End-->
+   </div>
+   </div>
+   <!-- *******************Preview Advertisment end********************-->
+   </div>
+   <!--div2 end -->
+   </div>
+   <!--page-view end-->
+</section>
+
+
+

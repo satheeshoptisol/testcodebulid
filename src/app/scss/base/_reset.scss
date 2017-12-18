@@ -1,0 +1,56 @@
+html{
+	@extend %width-100;
+	@extend %height-100;
+}
+body{
+	background:map-get($colors,light); 
+	font-family:map-get($font-linotte,regular);
+	font-size: map-get($font-linotte,default);
+	@extend %width-100;
+	min-height: 100%;
+	font-size: 14px;
+}
+img{
+	max-width: 100%;
+}
+a{
+	&:hover{
+		color:map-get($colors,primary);
+		text-decoration: none;
+	}
+}
+ul,li{
+	list-style: none;
+	@extend %margin-0;
+	@extend %padding-0;
+}
+#deselectAll{
+	@extend %display-none;
+}
+#selectAll{
+	@extend %display-none;
+}
+.divider {
+	display: none;
+}
+.page-view {
+	margin-top: 14px;
+}
+.multiSelect {
+	button{
+		@extend .text-left;
+		@extend %width-100;
+		border-bottom: 1px solid #ebeaea;
+		@extend %border-bottom;
+		background:transparent;
+		color: #968e8e;
+		@extend %padding-0;
+		.caret{
+			float: right;
+		}
+	}
+}
+
+.multiSelect .checkboxLayer{
+	 right: 12px;
+}

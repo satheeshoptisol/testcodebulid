@@ -1,0 +1,86 @@
+%tableListView{
+	border: 1px solid #eaeaea;
+	input{
+		@extend %width-100;
+		border: 1px solid #e7e7e7;
+		padding: 5px 0;
+	}
+	tr{
+		&:nth-child(1) {
+			background-color: #f9f9f9 !important;
+		}
+		&:nth-child(2) {
+			background-color: #fcfcfc;
+			&:hover{
+				background-color: #fcfcfc; 
+				td{
+				color: #6e6b70;
+			}
+			}
+		}
+		&:hover {
+			td{
+				color: #000;
+			}
+		}
+	}
+	th{
+		@extend .text-center;
+		font-family:map-get($font-linotte,semiBold);
+		font-size: 18px;
+		&:nth-child(2) {
+			@extend .text-left;
+		}
+		&:nth-child(3) {
+			@extend .text-left;
+		}
+	}
+	td{
+		color: #6e6b70;
+		font-size:16px;
+		@extend .text-center;
+		&:nth-child(2) {
+			@extend .text-left;
+		}
+		&:nth-child(3) {
+			@extend .text-left;
+		}
+	}
+
+}
+%table-box{
+	background-color: map-get($colors,white);
+	padding: 10px 15px;
+	margin: 0 auto;
+	box-shadow: 0px 0px 3px 0px #bbc8d1;
+	border-radius: 5px;
+	overflow-x:scroll;
+}
+.action-icons{
+	color: #eee !important;
+	white-space: nowrap;	
+	button{
+		@extend %icon-button;
+	}
+	.edit-icon{
+		color: map-get($colors,blue);
+	}
+	.delete-icon{
+		color:map-get($colors,brightRed);
+	}
+}
+.filter-action{
+	color: #cdc7c7 !important;
+	button{
+		@extend %icon-button;
+	}
+	.search-icon{
+		color: #4e4747;
+	}
+	.filter-icon{
+		@extend .search-icon;
+	}
+}
+.sort-icon{
+	float: right;
+}

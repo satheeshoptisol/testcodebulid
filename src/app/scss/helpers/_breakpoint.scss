@@ -1,0 +1,44 @@
+@media (max-width:1024px) {
+	.login-credentials input{ max-width: 92%; }
+	.login-credentials span, .AdvertiserDetails span { margin-right: 2px; }
+}
+@media (max-width:990px) {
+	.login-right-side {	width:100%; }
+	.login-left-side { display: none !important; }
+	.ds-analytics{ margin-bottom:10px; }
+	.notification { min-width: 40%; }
+	.adsDetail input{ width: 92%; }
+	.edit-profile input { width: 88%; }
+	.adsTypeSlideOut { min-width: 40%; }
+	.AdvertiserDetails label { left: 36px !important; }
+}
+@media (max-width:768px) {
+	.login-right-side {	width:100%; }
+	.login-left-side { display: none; }
+	.notification { min-width: 50%; }
+	.adsTypeSlideOut { min-width: 65%; }
+	.createadvertiserSlideOut, .advertiserDetailSlideOut {
+		max-width: 65%;
+	}
+}
+@media (max-width: 667px) {
+	.login-details { width: 100% !important; }
+	.notification { width: 50% !important; }
+	.adsTypeSlideOut, .createadvertiserSlideOut, .createinstantSlideOut ,.advertiserDetailSlideOut  {
+		min-width: 85%;
+	}
+
+}
+@media (max-width: 568px) {
+	.adsDetail input{ width: 90%;}
+}
+@media (max-width: 375px) {
+	.login-credentials input{ max-width: 90%; }
+	.login-credentials > label{ left: 20px !important; }
+	.adsTypeSlideOut, .createadvertiserSlideOut, .createinstantSlideOut ,.advertiserDetailSlideOut  {
+		min-width: 100%;
+	}
+	.checkboxLayer.show{ width: 254px; }
+	.adsDetail input{ width: 86%; }
+	.notification { min-width: 70%; }
+}

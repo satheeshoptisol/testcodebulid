@@ -1,0 +1,100 @@
+.login-page{
+	@extend %padding-0;
+}
+$loginConfig: 'login-left-side' primary, 'login-right-side' white; 
+@each $loginPage in $loginConfig {
+	.#{nth($loginPage, 1)} {
+		background-color: map-get($colors, nth($loginPage, 2));
+		@extend .text-center;
+		@extend %display-table;
+		height: 100vh;
+		.login-content{
+			@extend %content-middle;
+			h3{
+				margin: 30px 0;
+			}
+		}
+		.login-left-content{
+			@extend %content-middle;
+			p{
+				font-size: 20px;
+				color: map-get($colors,white);
+				margin-bottom: 40px;
+				@extend %margin-auto;
+			}
+		}
+	}
+}
+.login-details{
+	width:80%;
+	@extend %margin-auto;
+	@extend .text-center;
+	h3{
+		@extend .text-left;
+	}
+}
+.login-credentials{
+	@extend %lineInputField;
+	@extend .text-left;
+	display: block;
+	padding: 16px 0;
+	position:relative;
+	input{
+		width: 94%;
+	}
+	label{
+		left: 30px;
+	}
+}
+.forgot-password{
+	@extend .text-right;
+}
+.signin-button{
+	@extend %btn-primary-small;
+	padding: 10px 36px;
+	@extend %slider-button;
+}
+
+
+/* loading bar theme*/
+#loading-bar .bar {
+ background: #fe5421 ;
+}
+#loading-bar-spinner .spinner-icon {
+ border-top-color:  #fe5421 ;
+ border-left-color: #fe5421 ;
+}
+#loading-bar .peg {
+ -moz-box-shadow: #fe5421  1px 0 6px 1px;
+ -ms-box-shadow: #fe5421  1px 0 6px 1px;
+ -webkit-box-shadow: #fe5421  1px 0 6px 1px;
+ box-shadow: #01cafc  1px 0 6px 1px;
+}
+
+.loading-spinner {
+ -webkit-animation:spin 1s linear infinite;
+ -moz-animation:spin 1s linear infinite;
+ animation:spin 1s linear infinite;
+}
+
+
+/* loading bar theme*/
+#loading-bar .bar {
+ background: #fe5421 ;
+}
+#loading-bar-spinner .spinner-icon {
+ border-top-color:  #fe5421 ;
+ border-left-color: #fe5421 ;
+}
+#loading-bar .peg {
+ -moz-box-shadow: #fe5421  1px 0 6px 1px;
+ -ms-box-shadow: #fe5421  1px 0 6px 1px;
+ -webkit-box-shadow: #fe5421  1px 0 6px 1px;
+ box-shadow: #01cafc  1px 0 6px 1px;
+}
+
+.loading-spinner {
+ -webkit-animation:spin 1s linear infinite;
+ -moz-animation:spin 1s linear infinite;
+ animation:spin 1s linear infinite;
+}

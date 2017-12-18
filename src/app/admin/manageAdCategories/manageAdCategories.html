@@ -1,0 +1,154 @@
+<section class="main-content" ng-class="{'contentLeft': cft.myClass.contentLeft}">
+  <div class="page-view">
+    <!--page-view-->
+    <div class="col-md-12">
+      <div class=" page-heading">
+        <h4 class="title-semibold">
+          <img src="../assets/images/manage_Advertisers-orange.png" alt="/">
+          <span>Manage Ads Categories</span>
+        </h4>
+        <p class="categoriesCount"> Total Ads Categories {{vm.categoryCount}}</p>
+        <div class="search-list">
+          <div class="input-group">
+            <input type="text" class="form-control" ng-model="vm.searchValue" ng-model-options="{debounce: 750}" ng-change="vm.checkEmpty();" placeholder="Search" aria-describedby="basic-addon1">
+              <span class="search-button input-group-addon" id="basic-addon1"><i class="fa fa-search" ng-click="vm.search(vm.searchValue);" aria-hidden="true"></i>
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <div class="ads-category-table">
+        <table class="table table-striped table-hover adsCategoryList">
+          <tr>
+            <!-- Table Heading-->
+            <th>#</th>
+            <th>Category
+              <span class="sort-icon"><i class="fa fa-sort" aria-hidden="true"></i></span>
+            </th>
+             <th>Status
+              <span class="sort-icon"><i class="fa fa-sort" aria-hidden="true"></i></span>
+            </th>
+            <th>Created Date
+             <span class="sort-icon"><i class="fa fa-sort" aria-hidden="true"></i>
+            </th>
+            <th class="addAdsCategory" ng-click="vm.openCreateCategoryModal();">
+              <span class="fa-stack"><i class="fa fa-circle fa-stack-2x"></i><i class="fa fa-plus fa-stack-1x fa-inverse"></i></span>
+            </th>
+          </tr>
+
+          <tr>
+           <td>
+              <div class="Advertiser-cb" ng-if="vm.filteredList.length !== 0 ">
+                <input class="advertiser-toggle-cb" id="styled-checkbox-all" type="checkbox" value="value1" ng-model="vm.isAllSelected" ng-change="vm.toggleAll();">
+                <label for="styled-checkbox-all"></label>
+              </div></td>
+            <td></td>
+            <td></td>
+           <td></td>
+            <td ng-show="vm.hideSearchClass.hideSearch">
+              <button class="btn delete-all-btn" ng-click="vm.deleteAllCategory()">Delete All</button>
+            </td>
+          </tr>
+
+          <tr ng-repeat="category in vm.filteredList | orderBy: '-updatedAt' ">
+          <td> <div class="Advertiser-cb">
+              <input class="advertiser-toggle-cb" id="styled-checkbox-{{$index}}" type="checkbox" value="value1" ng-model="category.selected" ng-change="vm.checkBoxToggled()">
+              <label for="styled-checkbox-{{$index}}"></label>
+            </div></td>
+            <td>{{category.name}}</td>
+            <td ng-init="status=vm.getStatus(category.published)">{{status}}</td>
+            <td>{{category.createdAt | date:'MM/dd/yyyy'}}</td>
+            <td class="action-icons">
+               <button ng-click="vm.openEditCategoryModal(category)"><span class="fa-stack"><i class="fa fa-circle fa-stack-2x"></i><i class="fa fa-pencil edit-icon fa-stack-1x fa-inverse"></i></span></button>
+              <button ng-click="vm.deleteModal(category)"><span class="fa-stack"><i class="fa fa-circle fa-stack-2x"></i><i class="fa fa-trash-o delete-icon fa-stack-1x fa-inverse"></i></span></button>
+            </td>
+          </tr>
+        </table>
+
+        <div ng-if="vm.filteredList.length === 0"><h3 class="text-uppercase  text-center ">No categories in this list</h3> </div>
+
+        <uib-pagination boundary-links="true" total-items="vm.categoryCount" ng-model="vm.currentPage" previous-text="&lsaquo;" ng-change="vm.pageChanged()" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;" items-per-page="vm.itemsPerPage" data-max-size="5" boundary-links="true" class="pagination-sm"></uib-pagination>
+      </div>
+    </div>
+  </div>
+  <!-- Page View -->
+</section>
+
+   <script type="text/ng-template" id="createCategory.html">
+   <form name="vm.createCategory" method="post">
+    <div class="modal-header deleteAdvertiser-header">
+      <button type="button" class="close close-advertsier-popup" ng-click="modal.cancel()" data-dismiss="modal">&times;</button>
+      <img class="advertiserPopUpPic" src="../assets/images/default-pic.png">
+    </div>
+    <div class="modal-body">
+     <div class="category-select">
+        <input  ng-model="modal.category"  type="text" name="category" placeholder="Category" required>
+        <label> Category</label>
+         <span ng-if= 'modal.category === undefined'>
+          <label for="name" class="error">{{modal.errorMessage}}</label>
+        </span>
+      </div>
+    </div>
+    <div class="modal-footer">
+    <button type="button" ng-click="modal.ok(vm.createCategory)" class="btn category-btn" >Submit</button>
+   <button type="button" ng-click="modal.cancel()" class="btn cancel-advertiser-btn" data-dismiss="modal">Cancel</button>
+
+    </div>
+    </form>
+  </script>
+
+
+   <script type="text/ng-template" id="editCategory.html">
+    <div class="modal-header deleteAdvertiser-header">
+      <button type="button" class="close close-advertsier-popup" ng-click="modal.cancel()" data-dismiss="modal">&times;</button>
+      <img class="advertiserPopUpPic" src="../assets/images/default-pic.png">
+    </div>
+    <div class="modal-body">
+
+      <div class="category-select">
+        <input  ng-model="modal.editCategory.name"  type="text" name="Select Category" placeholder="Select Category" required>
+        <label>Input Category</label>
+        <span ng-if= 'modal.editCategory.name === undefined '>
+          <label for="name" class="error">{{modal.errorMessage}}</label>
+        </span>
+      </div>
+
+       <div class="AdvertiserDetails">
+       <table class="category-edit" width="90%">
+            <tbody>
+              <tr>
+              <td class="status-label"><label>Status</label></td>
+                <td class="advertiser-status-toggle">
+                  <label class="advertiser-status-toggle">
+                    <input ng-model="modal.editCategory.published" ng-change="modal.isActiveToggle()" class="ng-pristine ng-untouched ng-valid ng-not-empty" aria-invalid="false" style="" type="checkbox">
+                    <div class="ad-slider"></div>
+                  </label>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
+          <label for="name" ng-show="vm.editAdvertiserForm.$submitted && vm.editAdvertiserForm.isActive.$error.required" class="error">This field is required.</label>
+        </div>
+
+    </div>
+    <div class="modal-footer">
+   <button type="button" ng-click="modal.ok()" class="btn category-btn" >Submit</button>
+  <button type="button" ng-click="modal.cancel()" class="btn cancel-advertiser-btn" data-dismiss="modal">Cancel</button>
+    </div>
+  </script>
+
+    <script type="text/ng-template" id="myModalContent.html">
+      <div class="modal-header deleteAdvertiser-header">
+        <button type="button" class="close close-advertsier-popup" ng-click="modal.cancel()" data-dismiss="modal">&times;</button>
+        <img class="advertiserPopUpPic" src="../assets/images/default-pic.png">
+      </div>
+      <div class="modal-body">
+        <p class="delAdvertiser-ques">Are you sure want to delete this Category?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" ng-click="modal.ok()" class="btn delete-advertiser-btn">Delete</button>
+        <button type="button" ng-click="modal.cancel()" class="btn cancel-advertiser-btn" data-dismiss="modal">Cancel</button>
+      </div>
+    </script>
+
